@@ -4,3 +4,7 @@ celery[redis]
 redis
 jinja2
 aiofiles
+sqlalchemy
+asyncpg
+psycopg2-binary
+python-dotenv

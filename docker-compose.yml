@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # 1. Web Server (FastAPI)
   web:
     build: .
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
@@ -11,8 +10,10 @@ services:
       - "8000:8000"
     depends_on:
       - redis
+      - db  # Wait for DB to start
+    env_file:
+      - .env
 
-  # 2. Worker (Celery Worker)
   worker:
     build: .
     command: celery -A app.worker.celery_app worker --loglevel=info
@@ -20,7 +21,23 @@ services:
       - .:/code
     depends_on:
       - redis
+      - db
+    env_file:
+      - .env
 
-  # 3. Broker (Redis)
   redis:
     image: redis:alpine
+
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=portfolio_db
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:

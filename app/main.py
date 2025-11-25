@@ -1,41 +1,23 @@
 from fastapi import FastAPI, Request
-from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from celery.result import AsyncResult
-from .tasks import ai_response_task
+from fastapi.templating import Jinja2Templates
+from app.routers import chat, projects  # Import our routers
 
-app = FastAPI()
+app = FastAPI(title="Professional Portfolio")
 
-# Mount static files (CSS, JS, Images) if you need them later
+# Mount Static Files
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
-# Setup templates directory (similar to Django templates)
+# Setup Templates
 templates = Jinja2Templates(directory="app/templates")
 
+# --- INCLUDE ROUTERS (This connects your "urls" folders) ---
+app.include_router(chat.router)
+app.include_router(projects.router)
+
 @app.get("/")
-async def read_root(request: Request):
+async def home(request: Request):
     """
     Renders the homepage.
-    We pass the 'request' object required by Jinja2.
     """
     return templates.TemplateResponse("index.html", {"request": request})
-
-@app.post("/ask")
-async def ask_bot(name: str):
-    """
-    Starts a background task with Celery.
-    Returns the task ID immediately so the UI doesn't freeze.
-    """
-    task = ai_response_task.delay(name)
-    return {"task_id": task.id, "message": "Task started"}
-
-@app.get("/result/{task_id}")
-async def get_result(task_id: str):
-    """
-    Checks the status of the Celery task.
-    The frontend polls this endpoint until the status is 'Done'.
-    """
-    res = AsyncResult(task_id)
-    if res.ready():
-        return {"status": "Done", "result": res.result}
-    return {"status": "Processing"}
