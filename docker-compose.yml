@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # 1. DJANGO (The Website and Admin Panel)
+  django:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app          # Hot-reload: Changes in PyCharm are reflected immediately
+      - media_data:/app/media # Persist uploaded images
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    env_file: .env
+
+  # 2. FASTAPI (Chatbot API)
+  fastapi:
+    build: .
+    # Start uvicorn on port 8001
+    command: uvicorn fastapi_app:app --host 0.0.0.0 --port 8001 --reload
+    volumes:
+      - .:/app
+    ports:
+      - "8001:8001"
+    depends_on:
+      - db
+      - redis
+    env_file: .env
+
+  # 3. CELERY WORKER (Task Executor)
+  celery:
+    build: .
+    # Warning: Ensure 'Web_Portfolio' matches your actual Django project folder name!
+    command: celery -A Web_Portfolio worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - db
+    env_file: .env
+
+  # 4. POSTGRES (The Database)
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=portfolio_db
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=secret
+    ports:
+      - "5432:5432"
+
+  # 5. REDIS (Message Broker)
+  redis:
+    image: redis:alpine
+
+volumes:
+  postgres_data:  # Persist DB data
+  media_data:     # Persist media files

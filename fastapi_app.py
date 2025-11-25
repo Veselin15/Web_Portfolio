@@ -5,7 +5,7 @@ import django
 
 # --- CRITICAL: Setup Django setup inside FastAPI ---
 # This allows FastAPI to use Django models and DB!
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'MyPortfolio.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Web_Portfolio.settings')
 django.setup()
 # ---------------------------------------------------
 
