@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio & AI Chat</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .project { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+        #chat-box { border: 1px solid #333; height: 300px; overflow-y: scroll; padding: 10px; margin-bottom: 10px; background: #f9f9f9; }
+        .message { margin: 5px 0; }
+        .user { color: blue; font-weight: bold; }
+        .bot { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to My Portfolio</h1>
+    <p>Django | FastAPI | Python Developer</p>
+
+    <h2>Talk to my AI Bot</h2>
+    <div id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Ask me something..." style="width: 70%;">
+    <button onclick="sendMessage()">Send</button>
+
+    <hr>
+
+    <h2>My Projects</h2>
+    <div class="project">
+        <h3>Project 1: Portfolio Site</h3>
+        <p>Built with FastAPI, Docker, and Celery.</p>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const inputField = document.getElementById("user-input");
+            const chatBox = document.getElementById("chat-box");
+            const message = inputField.value;
+
+            if (!message) return;
+
+            // Display user message immediately
+            chatBox.innerHTML += `<div class="message user">You: ${message}</div>`;
+            inputField.value = "";
+
+            // 1. Send request to FastAPI to start the task
+            const response = await fetch(`/ask?name=${encodeURIComponent(message)}`, { method: "POST" });
+            const data = await response.json();
+            const taskId = data.task_id;
+
+            chatBox.innerHTML += `<div class="message bot" id="temp-${taskId}">Bot: Thinking...</div>`;
+
+            // 2. Poll for the result (check every 1 second)
+            pollResult(taskId);
+        }
+
+        async function pollResult(taskId) {
+            const chatBox = document.getElementById("chat-box");
+            const tempMsg = document.getElementById(`temp-${taskId}`);
+
+            const interval = setInterval(async () => {
+                const res = await fetch(`/result/${taskId}`);
+                const data = await res.json();
+
+                if (data.status === "Done") {
+                    // Update the "Thinking..." text with the real response
+                    tempMsg.innerHTML = `Bot: ${data.result}`;
+                    clearInterval(interval); // Stop checking
+                }
+            }, 1000); // Check every 1 second
+        }
+    </script>
+</body>
+</html>

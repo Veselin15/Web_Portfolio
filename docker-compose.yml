@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  # 1. Web Server (FastAPI)
+  web:
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+
+  # 2. Worker (Celery Worker)
+  worker:
+    build: .
+    command: celery -A app.worker.celery_app worker --loglevel=info
+    volumes:
+      - .:/code
+    depends_on:
+      - redis
+
+  # 3. Broker (Redis)
+  redis:
+    image: redis:alpine
