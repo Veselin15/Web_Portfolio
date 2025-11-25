@@ -1,0 +1,19 @@
+# --- Core Frameworks ---
+Django>=4.2,<5.0
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0  # ASGI Server needed for FastAPI
+
+# --- Task Queue & Async ---
+celery>=5.3.0
+redis>=5.0.0
+eventlet>=0.33.3  # Fixes some Windows-specific issues with Celery
+
+# --- Database & Drivers ---
+psycopg2-binary>=2.9.0  # PostgreSQL adapter
+sqlalchemy>=2.0.0       # Needed if FastAPI accesses DB directly later
+
+# --- Utilities ---
+python-dotenv>=1.0.0    # To read .env files (Security)
+Pillow>=10.0.0          # Image processing (Required for Django ImageField)
+requests>=2.31.0        # For making HTTP requests
+gunicorn>=21.2.0        # WSGI Server for Production (Linux)
