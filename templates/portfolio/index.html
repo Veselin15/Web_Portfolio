@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Professional Portfolio</title>
+    <style>
+        /* --- CSS STYLES --- */
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f6f8; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; }
+
+        header { text-align: center; margin-bottom: 50px; }
+        h1 { color: #2c3e50; margin-bottom: 5px; }
+        .subtitle { color: #7f8c8d; font-size: 1.1em; }
+
+        /* Chat Section */
+        .chat-section { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 40px; }
+        .chat-box { height: 250px; overflow-y: auto; border: 1px solid #e1e4e8; padding: 15px; background: #fafafa; margin-bottom: 15px; border-radius: 5px; }
+        .msg { margin: 8px 0; padding: 8px 12px; border-radius: 15px; max-width: 80%; width: fit-content; }
+        .msg.user { background: #007bff; color: white; margin-left: auto; text-align: right; }
+        .msg.bot { background: #e9ecef; color: #333; margin-right: auto; }
+        .input-group { display: flex; gap: 10px; }
+        input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #218838; }
+
+        /* Projects Section */
+        .project-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px; display: flex; }
+        .project-img { width: 250px; height: 180px; object-fit: cover; background: #eee; }
+        .project-content { padding: 20px; flex: 1; }
+        .project-title { margin-top: 0; color: #2c3e50; }
+        .tech-tag { display: inline-block; background: #e3f2fd; color: #0d47a1; padding: 3px 8px; border-radius: 4px; font-size: 0.85em; margin-bottom: 10px; }
+        .project-link { text-decoration: none; color: #007bff; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Veselin's Portfolio</h1>
+        <div class="subtitle">Django | FastAPI | Celery | Docker</div>
+    </header>
+
+    <section class="chat-section">
+        <h3>🤖 Talk to my AI Assistant</h3>
+        <div class="chat-box" id="chat-window">
+            <div class="msg bot">Hello! I am running on a separate FastAPI microservice. Ask me anything!</div>
+        </div>
+        <div class="input-group">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </section>
+
+    <hr style="border: 0; border-top: 1px solid #ddd; margin: 40px 0;">
+
+    <section>
+        <h2>📂 My Projects</h2>
+
+        {% for project in projects %}
+        <div class="project-card">
+            {% if project.image %}
+                <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-img">
+            {% else %}
+                <div class="project-img" style="display:flex;align-items:center;justify-content:center;color:#999;">No Image</div>
+            {% endif %}
+
+            <div class="project-content">
+                <h3 class="project-title">{{ project.title }}</h3>
+                <span class="tech-tag">{{ project.tech_stack }}</span>
+                <p>{{ project.description }}</p>
+                {% if project.url %}
+                    <a href="{{ project.url }}" target="_blank" class="project-link">View Project &rarr;</a>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+            <p style="text-align:center; color:#777;">No projects added yet. Please add them via the /admin panel.</p>
+        {% endfor %}
+    </section>
+</div>
+
+<script>
+    async function sendMessage() {
+        const inputField = document.getElementById('user-input');
+        const chatWindow = document.getElementById('chat-window');
+        const message = inputField.value;
+
+        if (!message) return;
+
+        // 1. Display User Message
+        chatWindow.innerHTML += `<div class="msg user">${message}</div>`;
+        inputField.value = '';
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+
+        // 2. Call FastAPI (Port 8001)
+        // We use fetch to send the task to the queue
+        try {
+            const response = await fetch(`http://localhost:8001/api/chat?message=${encodeURIComponent(message)}`, {
+                method: 'POST'
+            });
+            const data = await response.json();
+            const taskId = data.task_id;
+
+            // Show temporary loading message
+            chatWindow.innerHTML += `<div class="msg bot" id="temp-${taskId}"><i>Thinking... (Celery Task)</i></div>`;
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+
+            // 3. Start Polling for the result
+            pollResult(taskId);
+
+        } catch (error) {
+            console.error(error);
+            chatWindow.innerHTML += `<div class="msg bot" style="color:red;">Error connecting to FastAPI on port 8001.</div>`;
+        }
+    }
+
+    // Function to check task status every 1 second
+    async function pollResult(taskId) {
+        const tempMsg = document.getElementById(`temp-${taskId}`);
+
+        const interval = setInterval(async () => {
+            try {
+                const res = await fetch(`http://localhost:8001/api/status/${taskId}`);
+                const data = await res.json();
+
+                if (data.status === 'Done') {
+                    // Update the message with the final AI response
+                    tempMsg.innerHTML = data.result;
+                    tempMsg.style.fontStyle = 'normal';
+                    clearInterval(interval); // Stop polling
+                }
+            } catch (e) {
+                console.error("Polling error", e);
+                clearInterval(interval);
+            }
+        }, 1000); // Check every 1 second
+    }
+</script>
+
+</body>
+</html>
