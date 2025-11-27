@@ -27,4 +27,6 @@ body {
 /* Chat window styling */
 #chat-window {
     background: #fdfdfd;
+}section, #projects {
+    scroll-margin-top: 70px;
 }

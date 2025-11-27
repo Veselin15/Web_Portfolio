@@ -1,31 +1,49 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from celery.result import AsyncResult
 import os
 import django
 
-# --- CRITICAL: Setup Django setup inside FastAPI ---
-# This allows FastAPI to use Django models and DB!
+# 1. Setup Django environment inside FastAPI
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Web_Portfolio.settings')
 django.setup()
-# ---------------------------------------------------
+
+# Import the task AFTER django.setup()
+from portfolio.tasks import get_chatbot_response
 
 app = FastAPI()
 
-# Allow CORS so the browser can talk to port 8000 and 8001
+# 2. CORS Settings (Allow traffic from localhost:8000)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, change this to your domain
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-@app.get("/api/chat")
-def read_root():
-    return {"message": "Hello from FastAPI running inside Django project!"}
 
-# Example of using a Celery task (we will create it later in Django)
-# from web.tasks import my_task
-# @app.post("/run-task")
-# def run_task():
-#     my_task.delay()
-#     return {"status": "Task sent"}
+@app.post("/api/chat")
+def run_chat_task(message: str):
+    """
+    Receives a message, starts a background task, and returns the Task ID.
+    """
+    task = get_chatbot_response.delay(message)
+    return {"task_id": task.id}
+
+
+@app.get("/api/status/{task_id}")
+def get_task_status(task_id: str):
+    """
+    Checks if the task is finished and returns the result.
+    """
+    task_result = AsyncResult(task_id)
+
+    if task_result.state == 'PENDING':
+        return {"status": "Processing"}
+    elif task_result.state == 'SUCCESS':
+        return {
+            "status": "Done",
+            "result": task_result.result
+        }
+    else:
+        return {"status": task_result.state}
