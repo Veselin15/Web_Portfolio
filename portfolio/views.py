@@ -1,28 +1,58 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.core.mail import send_mail
+from django.contrib import messages
+from django.conf import settings
 from .models import Project
 
 
 def home(request):
     """
-    Renders the homepage with separated project categories.
+    Renders the homepage and handles the Contact Form.
     """
-    # Fetch projects by category
+    # --- HANDLE CONTACT FORM ---
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+
+        if name and email and message:
+            try:
+                # Construct the email
+                subject = f"Portfolio Message from {name}"
+                full_message = f"Sender Name: {name}\nSender Email: {email}\n\nMessage:\n{message}"
+
+                # Send email to yourself (EMAIL_HOST_USER)
+                send_mail(
+                    subject,
+                    full_message,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [settings.EMAIL_HOST_USER],
+                    fail_silently=False,
+                )
+                messages.success(request, "Your message has been sent successfully!")
+                return redirect('home')
+
+            except Exception as e:
+                messages.error(request, f"Error sending message: {e}")
+        else:
+            messages.error(request, "Please fill in all fields.")
+
+    # --- LOAD DATA FOR TEMPLATE ---
     software_projects = Project.objects.filter(category='SW')
     electronics_projects = Project.objects.filter(category='EL')
 
-    # Static data for Education (No DB needed as discussed)
+    # Static Data
     education_data = [
         {
             'institution': 'Technical University',
             'degree': 'BSc Computer Science',
             'year': '2019 - 2023',
-            'description': 'Algorithms, C++, OOP, Mathematics.',
+            'description': 'Algorithms, C++, OOP.',
             'icon': 'fas fa-graduation-cap'
         },
-        # Add more items here...
+        # ... other items ...
     ]
 
-    # Static data for Certificates
     certificates_data = [
         {
             'title': 'Python Advanced',
@@ -30,7 +60,7 @@ def home(request):
             'year': '2023',
             'color': 'primary'
         },
-        # Add more items here...
+        # ... other items ...
     ]
 
     context = {
@@ -44,8 +74,5 @@ def home(request):
 
 
 def project_detail(request, slug):
-    """
-    Renders the detailed page for a specific project (mainly for Electronics).
-    """
     project = get_object_or_404(Project, slug=slug)
     return render(request, 'portfolio/project_detail.html', {'project': project})
