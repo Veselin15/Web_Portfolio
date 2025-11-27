@@ -1,0 +1,68 @@
+/* --- FLOATING CHAT WIDGET --- */
+
+.chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px; /* Bottom Left corner */
+    width: 320px;
+    background-color: #fff;
+    border-radius: 10px 10px 0 0;
+    z-index: 10000; /* Always on top */
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    border: 1px solid #ccc;
+}
+
+.chat-header {
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s;
+}
+
+.chat-header:hover {
+    filter: brightness(0.9);
+}
+
+/* Container for body and input to be toggled */
+.chat-body-container {
+    display: block; /* Default: Visible */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Minimized State Class (we will toggle this via JS) */
+.chat-widget.minimized .chat-body-container {
+    display: none;
+}
+
+.chat-window {
+    height: 250px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+}
+
+.chat-input-area input {
+    font-size: 0.9rem;
+}
+
+/* Message Bubbles */
+.msg {
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 15px;
+    max-width: 85%;
+    width: fit-content;
+    word-wrap: break-word;
+}
+
+.msg.user {
+    background: #0dcaf0; /* Bootstrap info color */
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 2px;
+}
+
+.msg.bot {
+    background: #e9ecef;
+    color: #333;
+    border-bottom-left-radius: 2px;
+}
