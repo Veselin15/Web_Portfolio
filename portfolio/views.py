@@ -60,6 +60,30 @@ def home(request):
             'year': '2023',
             'color': 'primary'
         },
+        {
+            'title': 'Django Advanced',
+            'issuer': 'SoftUni',
+            'year': '2025',
+            'color': 'primary'
+        },
+        {
+            'title': 'Postgre SQL',
+            'issuer': 'SoftUni',
+            'year': '2024',
+            'color': 'primary'
+        },
+        {
+            'title': 'DSD II Diplom',
+            'issuer': 'Germany',
+            'year': '2024',
+            'color': 'primary'
+        },
+        {
+            'title': 'Python Fundamentals',
+            'issuer': 'SoftUni',
+            'year': '2023',
+            'color': 'primary'
+        }
         # ... other items ...
     ]
 
