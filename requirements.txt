@@ -17,3 +17,5 @@ python-dotenv>=1.0.0    # To read .env files (Security)
 Pillow>=10.0.0          # Image processing (Required for Django ImageField)
 requests>=2.31.0        # For making HTTP requests
 gunicorn>=21.2.0        # WSGI Server for Production (Linux)
+
+huggingface_hub>=0.23.0
