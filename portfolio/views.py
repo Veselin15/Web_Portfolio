@@ -3,7 +3,7 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
 from .models import Project
-
+from django.urls import reverse
 
 def home(request):
     """
@@ -30,7 +30,7 @@ def home(request):
                     fail_silently=False,
                 )
                 messages.success(request, "Your message has been sent successfully!")
-                return redirect('home')
+                return redirect(reverse('home') + '#contact')
 
             except Exception as e:
                 messages.error(request, f"Error sending message: {e}")
