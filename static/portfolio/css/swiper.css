@@ -1,33 +1,29 @@
-/* --- SWIPER STYLE --- */
+/* static/portfolio/css/swiper.css */
+
 .certificate-swiper {
-    width: 100%; padding: 40px 0 60px 0;
+    padding: 20px 0 60px 0;
 }
 
-.certificate-swiper .swiper-slide {
-    width: 280px; height: 380px;
-    background-color: #1e293b; /* bg-card */
-    border: 1px solid #334155;  /* border-slate-700 */
-    border-radius: 1rem;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center;
-    opacity: 0.4; transition: all 0.4s;
+.swiper-slide {
+    /* Леко прозрачни неактивните */
+    opacity: 0.4;
+    transform: scale(0.9);
+    transition: all 0.4s ease;
 }
 
-.certificate-swiper .swiper-slide-active {
-    opacity: 1; transform: scale(1.1); z-index: 10;
-    border-color: #38bdf8; /* primary */
-    box-shadow: 0 0 30px rgba(56, 189, 248, 0.15);
-    background-color: #253045;
+.swiper-slide-active {
+    /* Активният е ярък и голям */
+    opacity: 1;
+    transform: scale(1.05);
+    z-index: 10;
 }
 
-.cert-icon { font-size: 3rem; color: #818cf8; margin-bottom: 1.5rem; }
-.cert-title { color: white; font-weight: 700; font-size: 1.25rem; margin-bottom: 0.5rem; }
-.cert-year {
-    background: rgba(56, 189, 248, 0.1); color: #38bdf8;
-    padding: 0.25rem 0.75rem; border-radius: 1rem;
-    font-family: monospace; font-size: 0.8rem; margin-top: 1rem;
+/* Точките долу */
+.swiper-pagination-bullet {
+    background: #94a3b8 !important;
 }
-
-.swiper-pagination-bullet { background: #94a3b8; opacity: 0.5; }
-.swiper-pagination-bullet-active { background: #38bdf8; width: 20px; border-radius: 4px; opacity: 1; }
+.swiper-pagination-bullet-active {
+    background: #38bdf8 !important;
+    width: 24px;
+    border-radius: 4px;
+}
