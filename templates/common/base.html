@@ -1,16 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Veselin's Portfolio{% endblock %}</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap"
-          rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,62 +21,134 @@
                         mono: ['JetBrains Mono', 'monospace'],
                     },
                     colors: {
-                        // Custom Dark Theme Palette
                         bg: '#0f172a',       /* Slate 900 */
                         card: '#1e293b',     /* Slate 800 */
                         primary: '#38bdf8',  /* Sky 400 */
                         secondary: '#94a3b8',/* Slate 400 */
                         accent: '#818cf8',   /* Indigo 400 */
+                    },
+                    animation: {
+                        'spin-slow': 'spin 12s linear infinite',
                     }
                 }
             }
         }
     </script>
 
-    <link rel="stylesheet" href="{% static 'portfolio/css/chat_bot.css' %}?v=9">
-    <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}?v=9">
+    <link rel="stylesheet" href="{% static 'portfolio/css/chat_bot.css' %}?v=11">
+    <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}?v=11">
 </head>
-<body class="bg-bg text-slate-200 font-sans antialiased selection:bg-primary selection:text-bg">
+<body class="bg-bg text-slate-200 font-sans antialiased selection:bg-primary selection:text-bg relative">
 
-<nav class="fixed w-full z-50 top-0 start-0 bg-[#0f172a] border-b border-slate-800 shadow-lg">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between p-4">
-        <a href="{% url 'home' %}" class="flex items-center space-x-2 group">
-            <span class="text-2xl font-mono font-bold text-white group-hover:text-sky-400 transition">Veselin<span
-                    class="text-sky-400 group-hover:text-white">.Dev</span></span>
-        </a>
+<nav class="fixed w-full z-50 top-0 start-0 bg-[#0f172a] border-b border-slate-700 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
 
-        <div class="hidden md:block w-auto">
-            <ul class="flex space-x-8 font-medium text-slate-300">
-                <li><a href="{% url 'home' %}#about" class="hover:text-sky-400 transition-colors py-2">About</a></li>
-                <li><a href="{% url 'home' %}#education" class="hover:text-sky-400 transition-colors py-2">Education</a>
-                </li>
-                <li><a href="{% url 'home' %}#certificates" class="hover:text-sky-400 transition-colors py-2">Certificates</a>
-                </li>
-                <li><a href="{% url 'home' %}#projects" class="hover:text-sky-400 transition-colors py-2">Projects</a>
-                </li>
-                <li>
+            <div class="flex-shrink-0">
+                <a href="{% url 'home' %}" class="flex items-center gap-2 group">
+                    <span class="text-2xl font-mono font-bold text-white tracking-tight group-hover:text-primary transition-colors">
+                        Veselin<span class="text-primary group-hover:text-white transition-colors">.Dev</span>
+                    </span>
+                </a>
+            </div>
+
+            <div class="md:block">
+                <div class="ml-10 flex items-center space-x-8">
+                    <a href="{% url 'home' %}#about" class="text-sm font-bold text-white hover:text-primary transition-colors py-2 relative group uppercase tracking-wide">
+                        About
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="{% url 'home' %}#education" class="text-sm font-bold text-white hover:text-primary transition-colors py-2 relative group uppercase tracking-wide">
+                        Education
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="{% url 'home' %}#certificates" class="text-sm font-bold text-white hover:text-primary transition-colors py-2 relative group uppercase tracking-wide">
+                        Certificates
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a href="{% url 'home' %}#projects" class="text-sm font-bold text-white hover:text-primary transition-colors py-2 relative group uppercase tracking-wide">
+                        Projects
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+
                     <a href="{% url 'home' %}#contact"
-                       class="bg-sky-400 text-slate-900 px-5 py-2 rounded-lg font-bold hover:bg-sky-300 transition">Contact</a>
-                </li>
-            </ul>
+                       class="px-5 py-2.5 rounded-xl bg-primary text-slate-900 font-extrabold border border-primary hover:bg-white hover:text-primary transition-all shadow-[0_0_15px_rgba(56,189,248,0.3)]">
+                        Contact
+                    </a>
+                </div>
+            </div>
+
+            <div class="-mr-2 flex md:hidden">
+                <button type="button" onclick="toggleMobileMenu()"
+                        class="inline-flex items-center justify-center p-2 rounded-lg text-white hover:bg-slate-800 focus:outline-none transition-colors border border-slate-700">
+                    <span class="sr-only">Open main menu</span>
+                    <i id="menu-icon-closed" class="fas fa-bars text-xl text-white"></i>
+                    <i id="menu-icon-open" class="fas fa-times text-xl text-white hidden"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="hidden md:hidden bg-[#0f172a] border-b border-slate-700 absolute w-full left-0 top-20 shadow-2xl z-50" id="mobile-menu">
+        <div class="px-4 pt-4 pb-6 space-y-2 flex flex-col">
+            <a href="{% url 'home' %}#about" onclick="toggleMobileMenu()" class="text-white hover:text-primary hover:bg-slate-800 px-4 py-3 rounded-lg text-base font-bold transition-colors border-b border-slate-800">About</a>
+            <a href="{% url 'home' %}#education" onclick="toggleMobileMenu()" class="text-white hover:text-primary hover:bg-slate-800 px-4 py-3 rounded-lg text-base font-bold transition-colors border-b border-slate-800">Education</a>
+            <a href="{% url 'home' %}#certificates" onclick="toggleMobileMenu()" class="text-white hover:text-primary hover:bg-slate-800 px-4 py-3 rounded-lg text-base font-bold transition-colors border-b border-slate-800">Certificates</a>
+            <a href="{% url 'home' %}#projects" onclick="toggleMobileMenu()" class="text-white hover:text-primary hover:bg-slate-800 px-4 py-3 rounded-lg text-base font-bold transition-colors border-b border-slate-800">Projects</a>
+            <a href="{% url 'home' %}#contact" onclick="toggleMobileMenu()" class="mt-4 text-center bg-primary text-slate-900 font-extrabold px-4 py-3 rounded-lg hover:bg-white transition-colors shadow-lg">Contact Me</a>
         </div>
     </div>
 </nav>
-
 {% include "common/chat_bot.html" %}
 
-<main>
-    {% block content %}
+<main class="min-h-screen pt-20"> {% block content %}
     {% endblock %}
 </main>
 
-<footer class="bg-card border-t border-slate-800 py-10 mt-20 text-center text-secondary">
-    <p class="font-mono text-sm">&copy; 2025 Vladimir. Built with <span class="text-primary">Django & Tailwind</span>.
-    </p>
+<footer class="bg-[#1e293b] border-t border-slate-800 py-10 mt-20 text-center text-secondary relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+        <p class="font-mono text-sm">&copy; 2025 Veselin. Built with <span class="text-primary font-bold">Django & Tailwind</span>.</p>
+
+        <div class="flex justify-center gap-6 mt-6">
+            <a href="#" class="text-slate-400 hover:text-primary transition-colors text-xl"><i class="fab fa-github"></i></a>
+            <a href="#" class="text-slate-400 hover:text-blue-500 transition-colors text-xl"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="text-slate-400 hover:text-pink-500 transition-colors text-xl"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="{% static 'portfolio/js/chat_bot.js' %}"></script>
+
+<script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const iconClosed = document.getElementById('menu-icon-closed');
+        const iconOpen = document.getElementById('menu-icon-open');
+
+        if (menu.classList.contains('hidden')) {
+            // Open
+            menu.classList.remove('hidden');
+            iconClosed.classList.add('hidden');
+            iconOpen.classList.remove('hidden');
+        } else {
+            // Close
+            menu.classList.add('hidden');
+            iconClosed.classList.remove('hidden');
+            iconOpen.classList.add('hidden');
+        }
+    }
+
+    // Close mobile menu when resizing to desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+            document.getElementById('mobile-menu').classList.add('hidden');
+            document.getElementById('menu-icon-closed').classList.remove('hidden');
+            document.getElementById('menu-icon-open').classList.add('hidden');
+        }
+    });
+</script>
+
 {% block extra_scripts %}
     <script src="{% static 'portfolio/js/swiper_setup.js' %}"></script>
 {% endblock %}
