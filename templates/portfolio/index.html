@@ -2,43 +2,53 @@
 {% load static %}
 
 {% block content %}
-    <section id="about">
-        <div class="container flex flex-col md:flex-row items-center gap-12">
-            <div class="md:w-1/2 text-center md:text-left">
-                <h1 class="text-5xl md:text-7xl font-bold mb-6">
-                    Hello, I'm <br><span class="text-primary">Veselin</span>
+    <section id="about" class="min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6 text-center md:text-left order-2 md:order-1">
+                <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight">
+                    Hello, I'm <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Veselin</span>
                 </h1>
-                <p class="text-xl text-muted mb-8">
-                    Python Developer bridging <span class="text-primary">Software</span> and <span class="text-accent">Hardware</span>.
+                <p class="text-xl text-slate-400 max-w-lg mx-auto md:mx-0 leading-relaxed">
+                    Python Developer creating the bridge between <span class="text-primary font-mono">Software</span> and <span class="text-accent font-mono">Hardware</span>.
                 </p>
-                <div class="flex gap-4 justify-center md:justify-start">
-                    <a href="#projects" class="btn btn-primary">View Projects</a>
-                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+                <div class="flex gap-4 justify-center md:justify-start pt-4">
+                    <a href="#projects" class="px-8 py-3 bg-primary text-bg font-bold rounded-xl hover:bg-sky-400 transition shadow-lg shadow-primary/20">My Work</a>
+                    <a href="#contact" class="px-8 py-3 border border-slate-700 text-slate-300 rounded-xl hover:border-primary hover:text-white transition">Contact Me</a>
                 </div>
             </div>
-            <div class="md:w-1/2 flex justify-center">
-                <div class="hero-image-container">
-                    <div class="hero-spinner"></div>
-                    <img src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?cs=srgb&dl=pexels-kevin-ku-92347-577585.jpg&fm=jpg" class="hero-img w-full h-full object-cover">
+
+            <div class="flex justify-center order-1 md:order-2">
+                <div class="relative w-72 h-72 md:w-96 md:h-96">
+                    <div class="absolute inset-0 border-2 border-dashed border-primary/30 rounded-full animate-[spin_12s_linear_infinite]"></div>
+                    <img src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?cs=srgb&dl=pexels-kevin-ku-92347-577585.jpg&fm=jpg"
+                         class="w-full h-full object-cover rounded-full border-4 border-card shadow-2xl relative z-10"
+                         alt="Veselin">
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="education">
-        <div class="container">
-            <h2 class="section-title"><span>01.</span> Education</h2>
-            <div class="max-w-3xl mx-auto">
+    <section id="education" class="py-20">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-3xl font-mono font-bold text-center mb-16 text-white"><span class="text-primary">01.</span> Education</h2>
+
+            <div class="space-y-8 relative border-l-2 border-slate-800 ml-4 md:ml-0 md:pl-8">
                 {% for edu in education %}
-                <div class="timeline-item group">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-card group-hover:border-sky-500 transition">
-                        <div class="flex justify-between mb-2">
-                            <h3 class="text-xl font-bold text-white">{{ edu.degree }}</h3>
-                            <span class="text-primary font-mono text-sm">{{ edu.year }}</span>
+                <div class="relative pl-8 group">
+                    <div class="absolute -left-[9px] md:-left-[9px] top-0 w-4 h-4 bg-card border-2 border-slate-600 rounded-full group-hover:border-primary group-hover:bg-primary transition-colors"></div>
+
+                    <div class="bg-card p-6 rounded-2xl border border-slate-700/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5">
+                        <div class="flex flex-wrap justify-between items-start mb-2 gap-2">
+                            <h3 class="text-xl font-bold text-white group-hover:text-primary transition">{{ edu.degree }}</h3>
+                            <span class="text-xs font-mono py-1 px-3 rounded-full bg-slate-900 text-primary border border-slate-800">{{ edu.year }}</span>
                         </div>
-                        <h4 class="text-muted mb-2"><i class="{{ edu.icon }} text-accent mr-2"></i> {{ edu.institution }}</h4>
-                        <p class="text-sm text-slate-400">{{ edu.description }}</p>
+                        <h4 class="text-lg text-slate-400 mb-3 flex items-center gap-2">
+                            <i class="{{ edu.icon }} text-accent"></i> {{ edu.institution }}
+                        </h4>
+                        <p class="text-slate-500 leading-relaxed">{{ edu.description }}</p>
                     </div>
                 </div>
                 {% endfor %}
@@ -46,55 +56,70 @@
         </div>
     </section>
 
-    <section id="certificates">
-        <h2 class="section-title"><span>02.</span> Certificates</h2>
-        <div class="swiper certificate-swiper">
-            <div class="swiper-wrapper">
-                {% for cert in certificates %}
-                <div class="swiper-slide">
-                    <i class="fas fa-certificate cert-icon"></i>
-                    <h5 class="cert-title">{{ cert.title }}</h5>
-                    <p class="text-muted text-sm">{{ cert.issuer }}</p>
-                    <span class="cert-year">{{ cert.year }}</span>
+    <section id="certificates" class="py-20 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-mono font-bold text-center mb-12 text-white"><span class="text-primary">02.</span> Certificates</h2>
+
+            <div class="swiper certificate-swiper">
+                <div class="swiper-wrapper">
+                    {% for cert in certificates %}
+                    <div class="swiper-slide bg-card border border-slate-700 rounded-2xl p-8 flex flex-col items-center justify-center text-center hover:border-primary/30 transition-colors">
+                        <div class="w-20 h-20 bg-slate-900 rounded-full flex items-center justify-center mb-6 shadow-inner border border-slate-800">
+                            <i class="fas fa-certificate text-4xl text-accent"></i>
+                        </div>
+                        <h5 class="text-lg font-bold text-white mb-2">{{ cert.title }}</h5>
+                        <p class="text-slate-400 text-sm mb-4">{{ cert.issuer }}</p>
+                        <span class="text-xs font-mono text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20">{{ cert.year }}</span>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
+                <div class="swiper-pagination"></div>
             </div>
-            <div class="swiper-pagination"></div>
         </div>
     </section>
 
-    <section id="projects">
-        <div class="container">
-            <h2 class="section-title"><span>03.</span> Projects</h2>
+    <section id="projects" class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-mono font-bold text-center mb-16 text-white"><span class="text-primary">03.</span> Projects</h2>
             {% include "portfolio/projects.html" %}
         </div>
     </section>
 
-    <section id="contact" class="mb-20">
-        <div class="container max-w-2xl">
-            <div class="custom-card p-8">
-                <h2 class="text-2xl font-bold text-center mb-8">Get In Touch</h2>
+    <section id="contact" class="py-20 pb-32">
+        <div class="max-w-2xl mx-auto px-6">
+            <div class="bg-card p-8 md:p-12 rounded-3xl border border-slate-700/50 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+
+                <h2 class="text-3xl font-bold text-center mb-8 text-white relative z-10">Get In Touch</h2>
 
                 {% if messages %}
                     {% for message in messages %}
-                        <div class="p-4 mb-6 bg-green-900/20 border border-green-500 text-green-400 rounded text-center">
+                        <div class="p-4 mb-6 rounded-xl bg-green-500/10 border border-green-500/30 text-green-400 text-center text-sm">
                             {{ message }}
                         </div>
                     {% endfor %}
                 {% endif %}
 
-                <form method="POST" action="{% url 'home' %}#contact">
+                <form method="POST" action="{% url 'home' %}#contact" class="space-y-5 relative z-10">
                     {% csrf_token %}
-                    <label class="form-label">Name</label>
-                    <input type="text" name="name" class="input-field" required>
-
-                    <label class="form-label">Email</label>
-                    <input type="email" name="email" class="input-field" required>
-
-                    <label class="form-label">Message</label>
-                    <textarea name="message" class="input-field" rows="4" required></textarea>
-
-                    <button type="submit" class="btn btn-primary w-full mt-4">Send Message</button>
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-slate-400">Name</label>
+                            <input type="text" name="name" class="w-full bg-bg border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition placeholder-slate-600" placeholder="Your Name" required>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium text-slate-400">Email</label>
+                            <input type="email" name="email" class="w-full bg-bg border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition placeholder-slate-600" placeholder="you@example.com" required>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-slate-400">Message</label>
+                        <textarea name="message" rows="4" class="w-full bg-bg border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition placeholder-slate-600" placeholder="How can I help you?" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-bg font-bold py-4 rounded-xl hover:bg-sky-400 transition transform hover:-translate-y-1 shadow-lg shadow-primary/20 flex justify-center items-center gap-2">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane text-sm"></i>
+                    </button>
                 </form>
             </div>
         </div>
