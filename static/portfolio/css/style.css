@@ -1,33 +1,141 @@
+/* --- IDE THEME (One Dark Pro / VS Code Style) --- */
 @import "chat_bot.css";
 @import "swiper.css";
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    /* Palette: One Dark Pro based */
+    --bg-dark: #282C34;       /* Main Background */
+    --bg-darker: #21252B;     /* Navbar / Footer / Sidebar */
+    --bg-card: #2C313A;       /* Cards */
+    --text-main: #ABB2BF;     /* Main Text */
+    --text-muted: #828997;    /* Comments / Muted text */
+    
+    /* Accents */
+    --accent-blue: #61DAFB;   /* React Blue (Functions) */
+    --accent-green: #98C379;  /* Strings / Success */
+    --accent-purple: #C678DD; /* Keywords */
+    --accent-red: #E06C75;    /* Errors / Danger */
+    --accent-yellow: #E5C07B; /* Warnings */
+}
 
 body {
-    background-color: #f8f9fa; /* Light grey background */
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif; /* Clean text for reading */
 }
 
+/* Code-like Headings */
+h1, h2, h3, h4, h5, h6, .navbar-brand, .badge {
+    font-family: 'Fira Code', monospace; /* Monospace for headers */
+    color: #fff;
+}
+
+h1 .text-info, .navbar-brand .text-info {
+    color: var(--accent-blue) !important;
+}
+
+/* NAVBAR */
 .navbar {
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    background-color: var(--bg-darker) !important;
+    border-bottom: 1px solid #3E4451; /* Subtle border */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
+.nav-link {
+    color: var(--text-main) !important;
+    transition: color 0.3s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--accent-blue) !important;
+}
+
+/* BUTTONS */
+.btn-primary {
+    background-color: var(--accent-blue);
+    border-color: var(--accent-blue);
+    color: #21252B; /* Dark text on blue button for contrast */
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background-color: #4DB3D6;
+    border-color: #4DB3D6;
+}
+
+.btn-outline-secondary {
+    color: var(--text-main);
+    border-color: var(--text-muted);
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--bg-card);
+    color: #fff;
+    border-color: #fff;
+}
+
+/* CARDS (General Project Cards) */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid #3E4451; /* Border like editor split */
+    color: var(--text-main);
+}
+
+.card-title {
+    color: var(--accent-blue);
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Badges (Tech Stack) */
+.badge.bg-info {
+    background-color: rgba(97, 218, 251, 0.15) !important; /* Transparent Blue */
+    color: var(--accent-blue) !important;
+    border: 1px solid var(--accent-blue);
+}
+
+.badge.bg-primary {
+    background-color: var(--bg-darker) !important;
+    color: var(--accent-purple) !important; /* Date badges */
+    border: 1px solid var(--accent-purple);
+}
+
+/* HOVER EFFECTS */
 .project-card-hover {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
 }
 
 .project-card-hover:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+    border-color: var(--accent-blue); /* Glow effect */
 }
 
-.rounded-circle {
-    transition: border-color 0.3s ease;
-}
-.rounded-circle:hover {
-    border-color: #0dcaf0 !important; /* Bootstrap info color */
+/* SECTIONS */
+section, #projects {
+    scroll-margin-top: 80px;
+    border-bottom: 1px solid #333842; /* Separator lines */
 }
 
-/* Chat window styling */
-#chat-window {
-    background: #fdfdfd;
-}section, #projects {
-    scroll-margin-top: 70px;
+/* Footer */
+footer {
+    background-color: var(--bg-darker) !important;
+    border-top: 1px solid #3E4451;
+}
+
+/* Form Inputs (Contact) */
+.form-control {
+    background-color: var(--bg-darker);
+    border: 1px solid #3E4451;
+    color: #fff;
+}
+
+.form-control:focus {
+    background-color: var(--bg-darker);
+    border-color: var(--accent-blue);
+    color: #fff;
+    box-shadow: 0 0 0 0.25rem rgba(97, 218, 251, 0.25);
 }
