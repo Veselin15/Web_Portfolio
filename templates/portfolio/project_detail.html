@@ -4,49 +4,70 @@
 
 {% block content %}
 <div class="container py-5">
-    <a href="{% url 'home' %}#electronics-projects" class="btn btn-outline-secondary mb-4">
-        <i class="fas fa-arrow-left"></i> Back to Portfolio
+    <a href="{% url 'home' %}#electronics-projects" class="btn btn-outline-secondary mb-4 rounded-pill px-4">
+        <i class="fas fa-arrow-left me-2"></i> Back to Projects
     </a>
 
-    <div class="row">
-        <div class="col-lg-4 mb-4">
-            {% if project.image %}
-                <img src="{{ project.image.url }}" class="img-fluid rounded shadow mb-3" alt="{{ project.title }}">
-            {% endif %}
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
 
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <h5 class="fw-bold text-danger">Project Info</h5>
-                    <ul class="list-unstyled mt-3">
-                        <li class="mb-2">
-                            <i class="far fa-calendar-alt text-muted"></i>
-                            <strong>Started:</strong> {{ project.start_date|date:"F Y" }}
-                        </li>
-                        <li class="mb-2">
-                            <i class="fas fa-tasks text-muted"></i>
-                            <strong>Status:</strong>
-                            {% if project.end_date %}
-                                <span class="badge bg-secondary">Completed {{ project.end_date|date:"M Y" }}</span>
-                            {% else %}
-                                <span class="badge bg-success">Ongoing</span>
+            <div class="text-center mb-5">
+                <h1 class="display-4 fw-bold mb-3">{{ project.title }}</h1>
+                <div class="text-muted mb-4">
+                    <span class="badge bg-danger me-2">{{ project.get_category_display }}</span>
+                    <i class="far fa-calendar-alt"></i> {{ project.start_date|date:"F Y" }}
+                    {% if project.end_date %} - {{ project.end_date|date:"F Y" }}{% else %} - Present{% endif %}
+                </div>
+
+                {% if project.image %}
+                    <img src="{{ project.image.url }}" class="img-fluid rounded-3 shadow-lg w-100" style="max-height: 500px; object-fit: cover;" alt="{{ project.title }}">
+                {% endif %}
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="article-content fs-5" style="line-height: 1.8;">
+                        {{ project.detailed_content|safe }}
+                    </div>
+
+                    {% if project.gallery_images.all %}
+                        <h3 class="mt-5 mb-4 fw-bold">Project Gallery</h3>
+                        <div class="row g-3">
+                            {% for img in project.gallery_images.all %}
+                                <div class="col-md-6">
+                                    <a href="{{ img.image.url }}" target="_blank">
+                                        <img src="{{ img.image.url }}" class="img-fluid rounded shadow-sm" alt="{{ img.caption }}">
+                                    </a>
+                                    {% if img.caption %}
+                                        <p class="text-center text-muted small mt-1">{{ img.caption }}</p>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm bg-light sticky-top" style="top: 100px; z-index: 1;">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-3">Technical Details</h5>
+                            <hr>
+                            <p><strong><i class="fas fa-tools me-2 text-danger"></i> Tech Stack:</strong><br>
+                            {{ project.tech_stack }}</p>
+
+                            {% if project.url %}
+                                <p><strong><i class="fas fa-link me-2 text-primary"></i> Resources:</strong><br>
+                                <a href="{{ project.url }}" target="_blank" class="text-decoration-none">View Source / Demo</a></p>
                             {% endif %}
-                        </li>
-                        <li class="mb-2">
-                            <i class="fas fa-tools text-muted"></i>
-                            <strong>Tech:</strong> {{ project.tech_stack }}
-                        </li>
-                    </ul>
+
+                            <div class="alert alert-info mt-3 small">
+                                <i class="fas fa-info-circle"></i> This project is part of my portfolio in Electronics & Embedded Systems.
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-lg-8">
-            <h1 class="fw-bold mb-3 display-5">{{ project.title }}</h1>
-            <hr class="text-danger opacity-100" style="width: 100px; height: 3px;">
-
-            <div class="project-content mt-4 text-justify" style="font-size: 1.1rem; line-height: 1.8;">
-                {{ project.detailed_content|linebreaks }}
-            </div>
         </div>
     </div>
 </div>

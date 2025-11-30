@@ -19,8 +19,10 @@ requests>=2.31.0        # For making HTTP requests
 gunicorn>=21.2.0        # WSGI Server for Production (Linux)
 
 google-generativeai>=0.7.2
-# ... (вашите съществуващи библиотеки) ...
+
 gunicorn>=21.2.0
 
 # Google Gemini (New SDK)
 google-genai>=0.3.0
+
+django-ckeditor>=6.7.0
