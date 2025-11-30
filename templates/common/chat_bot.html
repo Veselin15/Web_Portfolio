@@ -1,19 +1,29 @@
-<div id="chat-widget" class="chat-widget shadow-lg">
-    <div class="chat-header bg-info text-white p-3 d-flex justify-content-between align-items-center" onclick="toggleChat()">
-        <div class="fw-bold"><i class="fas fa-robot me-2"></i> AI Assistant</div>
-        <i id="chat-icon" class="fas fa-chevron-down"></i>
-    </div>
+<div id="chat-container">
 
-    <div id="chat-body-container" class="chat-body-container">
-        <div id="chat-window" class="chat-window p-3 bg-light">
-            <div class="msg bot">Hi! I'm Vlado's AI. How can I help?</div>
+    <button id="chat-toggle-btn" onclick="toggleChat()">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <div id="chat-window-wrapper" class="hidden">
+        <div class="chat-header">
+            <div class="chat-title">
+                <i class="fas fa-brain"></i> AI Assistant
+            </div>
+            <button onclick="toggleChat()" class="close-btn"><i class="fas fa-times"></i></button>
         </div>
 
-        <div class="chat-input-area p-2 bg-white border-top d-flex">
-            <input type="text" id="user-input" class="form-control me-2" placeholder="Type..." onkeypress="handleEnter(event)">
-            <button class="btn btn-info text-white" onclick="sendMessage()">
+        <div id="chat-window">
+            <div class="msg bot">
+                Hi! I'm Vlado's AI. Ask me about his projects, skills, or education!
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" id="user-input" placeholder="Type a question..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()" class="send-btn">
                 <i class="fas fa-paper-plane"></i>
             </button>
         </div>
     </div>
+
 </div>

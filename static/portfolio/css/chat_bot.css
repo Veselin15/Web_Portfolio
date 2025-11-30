@@ -1,97 +1,121 @@
-/* --- IDE TERMINAL STYLE CHATBOT --- */
+/* --- MODERN FLOATING CHAT --- */
 
-.chat-widget {
+/* Контейнерът стои долу вдясно */
+#chat-container {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 350px;
-    background-color: #21252B; /* Darker terminal bg */
-    border-radius: 8px; /* Sharp corners like VS Code */
+    bottom: 30px;
+    right: 30px;
     z-index: 10000;
-    overflow: hidden;
-    font-family: 'Fira Code', monospace; /* Coding font */
-    border: 1px solid #181A1F;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-}
-
-.chat-header {
-    background-color: #333842; /* Title bar color */
-    color: #fff;
-    padding: 12px 15px;
-    border-bottom: 1px solid #181A1F;
-    cursor: pointer;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
-.chat-header:hover {
-    background-color: #3E4451;
+/* Кръглият бутон */
+#chat-toggle-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #38bdf8, #818cf8); /* Sky to Indigo */
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex; align-items: center; justify-content: center;
 }
 
-.chat-window {
-    height: 300px;
+#chat-toggle-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 35px rgba(56, 189, 248, 0.6);
+}
+
+/* Прозорецът на чата */
+#chat-window-wrapper {
+    width: 350px;
+    background-color: #1e293b; /* Dark Card */
+    border: 1px solid #334155;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 20px; /* Разстояние от бутона */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    transform-origin: bottom right;
+    transition: all 0.3s ease;
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Клас за скриване */
+.hidden {
+    display: none;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+/* Header */
+.chat-header {
+    background: #0f172a;
+    padding: 1rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid #334155;
+}
+.chat-title { color: white; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+.close-btn { background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 1.2rem; }
+.close-btn:hover { color: #f87171; }
+
+/* Messages Area */
+#chat-window {
+    height: 350px;
+    padding: 1rem;
     overflow-y: auto;
-    padding: 15px;
-    background-color: #282C34; /* Editor bg color */
-    color: #ABB2BF;
-    font-size: 0.85rem;
+    background-color: #1e293b;
+    display: flex; flex-direction: column; gap: 0.8rem;
 }
 
-/* Messages */
 .msg {
-    padding: 8px 12px;
-    margin: 8px 0;
-    border-radius: 4px;
-    max-width: 90%;
-    width: fit-content;
+    padding: 0.8rem 1rem;
+    border-radius: 0.8rem;
+    font-size: 0.9rem;
+    max-width: 85%;
     line-height: 1.5;
 }
 
 .msg.user {
-    background: #3E4451; /* Comment color bg */
-    color: #61DAFB; /* User text is Blue */
-    border-left: 3px solid #61DAFB;
-    margin-left: auto;
+    background-color: #38bdf8;
+    color: #0f172a;
+    align-self: flex-end; /* Дясно */
+    border-bottom-right-radius: 0;
 }
 
 .msg.bot {
-    background: #2C313A;
-    color: #98C379; /* Bot text is Green (like a string) */
-    border-left: 3px solid #98C379;
+    background-color: #334155;
+    color: #e2e8f0;
+    align-self: flex-start; /* Ляво */
+    border-bottom-left-radius: 0;
 }
 
-/* Input Area */
+/* Input */
 .chat-input-area {
-    padding: 10px;
-    background-color: #21252B;
-    border-top: 1px solid #181A1F;
-    display: flex;
+    padding: 1rem;
+    background: #0f172a;
+    border-top: 1px solid #334155;
+    display: flex; gap: 0.5rem;
 }
 
 .chat-input-area input {
-    background-color: #1E1E1E;
-    border: 1px solid #3E4451;
-    color: #98C379; /* Typing in green like code */
-    font-family: 'Fira Code', monospace;
-    font-size: 0.9rem;
+    flex-grow: 1;
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
 }
+.chat-input-area input:focus { outline: none; border-color: #38bdf8; }
 
-.chat-input-area input::placeholder {
-    color: #5C6370;
+.send-btn {
+    background: #38bdf8; color: #0f172a; border: none;
+    padding: 0 1rem; border-radius: 0.5rem; cursor: pointer;
+    transition: 0.2s;
 }
-
-.chat-input-area .btn {
-    background-color: #21252B;
-    border: 1px solid #3E4451;
-    color: #61DAFB;
-}
-
-.chat-input-area .btn:hover {
-    background-color: #2C313A;
-}
-
-/* Minimized state */
-.chat-widget.minimized .chat-body-container {
-    display: none;
-}
+.send-btn:hover { background: #0ea5e9; }

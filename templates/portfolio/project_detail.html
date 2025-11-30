@@ -3,72 +3,77 @@
 {% block title %}{{ project.title }} | Vlado.Dev{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-    <a href="{% url 'home' %}#electronics-projects" class="btn btn-outline-secondary mb-4 rounded-pill px-4">
-        <i class="fas fa-arrow-left me-2"></i> Back to Projects
+<div class="container pt-10 pb-20">
+    <a href="{% url 'home' %}#projects" class="btn btn-outline inline-flex items-center gap-2 mb-8 rounded-full px-6">
+        <i class="fas fa-arrow-left"></i> Back
     </a>
 
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
+    <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ project.title }}</h1>
+        <div class="flex justify-center gap-4 text-sm font-mono text-muted">
+            <span class="px-3 py-1 bg-card rounded border border-border text-primary">{{ project.get_category_display }}</span>
+            <span class="px-3 py-1 bg-card rounded border border-border">{{ project.start_date|date:"F Y" }}</span>
+        </div>
+    </div>
 
-            <div class="text-center mb-5">
-                <h1 class="display-4 fw-bold mb-3">{{ project.title }}</h1>
-                <div class="text-muted mb-4">
-                    <span class="badge bg-danger me-2">{{ project.get_category_display }}</span>
-                    <i class="far fa-calendar-alt"></i> {{ project.start_date|date:"F Y" }}
-                    {% if project.end_date %} - {{ project.end_date|date:"F Y" }}{% else %} - Present{% endif %}
-                </div>
+    <div class="grid md:grid-cols-3 gap-12">
+        <div class="md:col-span-2">
+            {% if project.image %}
+                <img src="{{ project.image.url }}" class="w-full rounded-xl shadow-2xl mb-8 border border-border">
+            {% endif %}
 
-                {% if project.image %}
-                    <img src="{{ project.image.url }}" class="img-fluid rounded-3 shadow-lg w-100" style="max-height: 500px; object-fit: cover;" alt="{{ project.title }}">
-                {% endif %}
+            <div class="prose prose-invert max-w-none text-slate-300 leading-loose">
+                {{ project.detailed_content|safe }}
             </div>
 
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="article-content fs-5" style="line-height: 1.8;">
-                        {{ project.detailed_content|safe }}
-                    </div>
-
-                    {% if project.gallery_images.all %}
-                        <h3 class="mt-5 mb-4 fw-bold">Project Gallery</h3>
-                        <div class="row g-3">
-                            {% for img in project.gallery_images.all %}
-                                <div class="col-md-6">
-                                    <a href="{{ img.image.url }}" target="_blank">
-                                        <img src="{{ img.image.url }}" class="img-fluid rounded shadow-sm" alt="{{ img.caption }}">
-                                    </a>
-                                    {% if img.caption %}
-                                        <p class="text-center text-muted small mt-1">{{ img.caption }}</p>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
+            {% if project.gallery_images.all %}
+                <h3 class="text-2xl font-bold text-white mt-12 mb-6 border-b border-border pb-2">Gallery</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {% for img in project.gallery_images.all %}
+                        <div class="group">
+                            <a href="{{ img.image.url }}" target="_blank" class="block overflow-hidden rounded-lg border border-border">
+                                <img src="{{ img.image.url }}" class="w-full h-48 object-cover transition duration-500 group-hover:scale-105">
+                            </a>
+                            {% if img.caption %}
+                                <p class="text-center text-xs text-muted mt-2">{{ img.caption }}</p>
+                            {% endif %}
                         </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <aside class="md:col-span-1">
+            <div class="custom-card p-6 sticky top-24">
+                <h4 class="text-lg font-bold text-white mb-4">Project Info</h4>
+
+                <div class="mb-6">
+                    <p class="text-xs text-muted uppercase tracking-wider mb-2">Tech Stack</p>
+                    <div class="flex flex-wrap gap-2">
+                        {% for tech in project.tech_stack.split|slice:":10" %}
+                        <span class="badge text-accent border-accent">{{ project.tech_stack }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <p class="text-xs text-muted uppercase tracking-wider mb-2">Status</p>
+                    {% if project.end_date %}
+                        <span class="text-green-400 font-mono text-sm">● Completed</span>
+                    {% else %}
+                        <span class="text-yellow-400 font-mono text-sm">● Ongoing</span>
                     {% endif %}
                 </div>
 
-                <div class="col-lg-4">
-                    <div class="card border-0 shadow-sm bg-light sticky-top" style="top: 100px; z-index: 1;">
-                        <div class="card-body p-4">
-                            <h5 class="fw-bold mb-3">Technical Details</h5>
-                            <hr>
-                            <p><strong><i class="fas fa-tools me-2 text-danger"></i> Tech Stack:</strong><br>
-                            {{ project.tech_stack }}</p>
-
-                            {% if project.url %}
-                                <p><strong><i class="fas fa-link me-2 text-primary"></i> Resources:</strong><br>
-                                <a href="{{ project.url }}" target="_blank" class="text-decoration-none">View Source / Demo</a></p>
-                            {% endif %}
-
-                            <div class="alert alert-info mt-3 small">
-                                <i class="fas fa-info-circle"></i> This project is part of my portfolio in Electronics & Embedded Systems.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% if project.url %}
+                    <hr class="border-border my-6">
+                    <p class="text-xs text-muted uppercase tracking-wider mb-2">Resources</p>
+                    <a href="{{ project.url }}" target="_blank" class="btn btn-primary w-full text-center flex items-center justify-center gap-2">
+                        <i class="fas fa-external-link-alt"></i> View Source
+                    </a>
+                {% endif %}
             </div>
-
-        </div>
+        </aside>
     </div>
 </div>
 {% endblock %}
