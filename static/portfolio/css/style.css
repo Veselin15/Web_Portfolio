@@ -161,3 +161,23 @@ footer {
     .timeline { padding-left: 1rem; border: none; } /* Simple timeline on mobile */
     .timeline-dot { display: none; }
 }
+
+.nav-link-desktop {
+    @apply text-sm font-bold text-slate-300 hover:text-white transition-colors py-2 relative uppercase tracking-wide;
+}
+
+.nav-underline {
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full;
+}
+
+.btn-contact {
+    @apply px-6 py-2.5 rounded-xl bg-primary text-slate-900 font-extrabold border border-primary hover:bg-white hover:text-primary hover:border-white transition-all shadow-lg hover:shadow-primary/50 transform hover:-translate-y-0.5;
+}
+
+.nav-link-mobile {
+    @apply text-slate-300 hover:text-white hover:bg-slate-800 px-4 py-3 rounded-lg text-base font-bold transition-colors border-b border-slate-800;
+}
+
+.btn-contact-mobile {
+    @apply mt-4 text-center bg-primary text-slate-900 font-extrabold px-4 py-3 rounded-lg hover:bg-white transition-colors shadow-lg;
+}
