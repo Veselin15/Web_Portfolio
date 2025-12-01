@@ -46,11 +46,24 @@ def home(request):
         {
             'institution': 'Technical University',
             'degree': 'BSc Computer Science',
-            'year': '2019 - 2023',
+            'year': '2019 - 2022',
             'description': 'Algorithms, C++, OOP.',
             'icon': 'fas fa-graduation-cap'
         },
-        # ... other items ...
+        {
+            'institution': 'Technical University',
+            'degree': 'SOFTUNI DJANGO PROFESSIONAL',
+            'year': '2025 - 2025',
+            'description': 'Algorithms, C++, OOP.',
+            'icon': 'fas fa-graduation-cap'
+        },
+        {
+            'institution': 'Master',
+            'degree': 'SOFTUNI DJANGO PROFESSIONAL',
+            'year': '2020 - 2023',
+            'description': 'Algorithms, C++, OOP.',
+            'icon': 'fas fa-graduation-cap'
+        }
     ]
 
     certificates_data = [
