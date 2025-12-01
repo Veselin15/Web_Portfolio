@@ -2,18 +2,20 @@
 {% load static %}
 
 {% block content %}
-    <section id="about" class="min-h-screen flex items-center pt-20 relative overflow-hidden">
+    <section id="home" class="min-h-screen flex items-center pt-20 relative overflow-hidden">
         <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -z-10"></div>
 
         <div class="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-6 text-center md:text-left order-2 md:order-1">
 
                 <div class="flex justify-center md:justify-start items-center gap-5 mb-2">
-                    <a href="https://github.com/Veselin15" target="_blank" class="text-slate-400 hover:text-white transition-colors text-2xl hover:scale-110 transform duration-300">
+                    <a href="https://github.com/Veselin15" target="_blank"
+                       class="text-slate-400 hover:text-white transition-colors text-2xl hover:scale-110 transform duration-300">
                         <i class="fab fa-github"></i>
                     </a>
 
-                    <a href="https://www.linkedin.com/in/veselin-veselinov-a7bb9930a/" target="_blank" class="text-slate-400 hover:text-[#0077b5] transition-colors text-2xl hover:scale-110 transform duration-300">
+                    <a href="https://www.linkedin.com/in/veselin-veselinov-a7bb9930a/" target="_blank"
+                       class="text-slate-400 hover:text-[#0077b5] transition-colors text-2xl hover:scale-110 transform duration-300">
                         <i class="fab fa-linkedin"></i>
                     </a>
 
@@ -36,8 +38,12 @@
                     <span class="text-primary font-mono" id="typed-text"></span>
                 </p>
                 <div class="flex gap-4 justify-center md:justify-start pt-4">
-                    <a href="#projects" class="px-8 py-3 bg-primary text-bg font-bold rounded-xl hover:bg-sky-400 transition shadow-lg shadow-primary/20">My Work</a>
-                    <a href="#contact" class="px-8 py-3 border border-slate-700 text-slate-300 rounded-xl hover:border-primary hover:text-white transition">Contact Me</a>
+                    <a href="#projects"
+                       class="px-8 py-3 bg-primary text-bg font-bold rounded-xl hover:bg-sky-400 transition shadow-lg shadow-primary/20">My
+                        Work</a>
+                    <a href="#contact"
+                       class="px-8 py-3 border border-slate-700 text-slate-300 rounded-xl hover:border-primary hover:text-white transition">Contact
+                        Me</a>
                 </div>
             </div>
 
@@ -52,26 +58,139 @@
         </div>
     </section>
 
+    <section id="about" class="py-20 relative bg-slate-900/50 border-y border-slate-800/50 overflow-hidden">
+
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+
+                <div class="space-y-8">
+                    <div>
+                        <h2 class="text-3xl font-mono font-bold text-white mb-6 flex items-center gap-3">
+                            <span class="text-primary">01.</span> About Me
+                        </h2>
+                        <div class="space-y-4 text-slate-300 text-lg leading-relaxed">
+                            <p>
+                                Hey there! I'm <span class="text-white font-bold">Veselin</span>. My journey started
+                                with taking apart electronics to see the circuits inside. Today, I channel that
+                                curiosity into code, building bridges between <span class="text-primary">software</span>
+                                and <span class="text-accent">hardware</span>.
+                            </p>
+                            <p>
+                                Currently finishing my training at <span class="text-white">SoftUni</span>, specializing
+                                in Python & Django. I don't just write code; I solve problems—whether it's optimizing a
+                                database or soldering an IoT microcontroller.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-800">
+                        <div>
+                            <h4 class="text-3xl font-bold text-white">2+</h4>
+                            <span class="text-xs text-slate-500 uppercase tracking-wider">Years Coding</span>
+                        </div>
+                        <div>
+                            <h4 class="text-3xl font-bold text-white">15+</h4>
+                            <span class="text-xs text-slate-500 uppercase tracking-wider">Projects</span>
+                        </div>
+                        <div>
+                            <h4 class="text-3xl font-bold text-white">100%</h4>
+                            <span class="text-xs text-slate-500 uppercase tracking-wider">Passion</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-3xl font-mono font-bold text-white mb-8 flex items-center gap-3 lg:justify-end">
+                        <span class="text-accent">01.5</span> Tech Stack
+                    </h2>
+
+                    <div class="grid grid-cols-2 gap-4">
+
+                        <div class="bg-card p-5 rounded-xl border border-slate-700 hover:border-primary/50 transition-all group hover:-translate-y-1">
+                            <h4 class="text-white font-bold mb-4 flex items-center gap-2 text-sm uppercase tracking-wide">
+                                <i class="fas fa-server text-primary"></i> Backend
+                            </h4>
+                            <div class="flex flex-wrap gap-4">
+                                <i class="devicon-python-plain text-3xl text-slate-400 group-hover:text-[#3776AB] transition-colors"
+                                   title="Python"></i>
+                                <i class="devicon-django-plain text-3xl text-slate-400 group-hover:text-[#092E20] transition-colors"
+                                   title="Django"></i>
+                                <i class="devicon-fastapi-plain text-3xl text-slate-400 group-hover:text-[#009688] transition-colors"
+                                   title="FastAPI"></i>
+                            </div>
+                        </div>
+
+                        <div class="bg-card p-5 rounded-xl border border-slate-700 hover:border-accent/50 transition-all group hover:-translate-y-1">
+                            <h4 class="text-white font-bold mb-4 flex items-center gap-2 text-sm uppercase tracking-wide">
+                                <i class="fas fa-database text-accent"></i> Data & Ops
+                            </h4>
+                            <div class="flex flex-wrap gap-4">
+                                <i class="devicon-postgresql-plain text-3xl text-slate-400 group-hover:text-[#336791] transition-colors"
+                                   title="PostgreSQL"></i>
+                                <i class="devicon-redis-plain text-3xl text-slate-400 group-hover:text-[#DC382D] transition-colors"
+                                   title="Redis"></i>
+                                <i class="devicon-docker-plain text-3xl text-slate-400 group-hover:text-[#2496ED] transition-colors"
+                                   title="Docker"></i>
+                            </div>
+                        </div>
+
+                        <div class="bg-card p-5 rounded-xl border border-slate-700 hover:border-yellow-500/50 transition-all group hover:-translate-y-1">
+                            <h4 class="text-white font-bold mb-4 flex items-center gap-2 text-sm uppercase tracking-wide">
+                                <i class="fas fa-microchip text-yellow-500"></i> Embedded
+                            </h4>
+                            <div class="flex flex-wrap gap-4">
+                                <i class="devicon-cplusplus-plain text-3xl text-slate-400 group-hover:text-[#00599C] transition-colors"
+                                   title="C++"></i>
+                                <i class="devicon-arduino-plain text-3xl text-slate-400 group-hover:text-[#00979D] transition-colors"
+                                   title="Arduino"></i>
+                                <i class="devicon-embeddedc-plain text-3xl text-slate-400 group-hover:text-white transition-colors"
+                                   title="C"></i>
+                            </div>
+                        </div>
+
+                        <div class="bg-card p-5 rounded-xl border border-slate-700 hover:border-pink-500/50 transition-all group hover:-translate-y-1">
+                            <h4 class="text-white font-bold mb-4 flex items-center gap-2 text-sm uppercase tracking-wide">
+                                <i class="fas fa-laptop-code text-pink-500"></i> Frontend
+                            </h4>
+                            <div class="flex flex-wrap gap-4">
+                                <i class="devicon-html5-plain text-3xl text-slate-400 group-hover:text-[#E34F26] transition-colors"
+                                   title="HTML5"></i>
+                                <i class="devicon-tailwindcss-original text-3xl text-slate-400 group-hover:text-[#38B2AC] transition-colors"
+                                   title="Tailwind"></i>
+                                <i class="devicon-javascript-plain text-3xl text-slate-400 group-hover:text-[#F7DF1E] transition-colors"
+                                   title="JavaScript"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="education" class="py-20">
         <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-3xl font-mono font-bold text-center mb-16 text-white"><span class="text-primary">01.</span> Education</h2>
+            <h2 class="text-3xl font-mono font-bold text-center mb-16 text-white"><span class="text-primary">02.</span>
+                Education</h2>
 
             <div class="space-y-8 relative border-l-2 border-slate-800 ml-4 md:ml-0 md:pl-8">
                 {% for edu in education %}
-                <div class="relative pl-8 group">
-                    <div class="absolute -left-[9px] md:-left-[9px] top-0 w-4 h-4 bg-card border-2 border-slate-600 rounded-full group-hover:border-primary group-hover:bg-primary transition-colors"></div>
+                    <div class="relative pl-8 group">
+                        <div class="absolute -left-[9px] md:-left-[9px] top-0 w-4 h-4 bg-card border-2 border-slate-600 rounded-full group-hover:border-primary group-hover:bg-primary transition-colors"></div>
 
-                    <div class="bg-card p-6 rounded-2xl border border-slate-700/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5">
-                        <div class="flex flex-wrap justify-between items-start mb-2 gap-2">
-                            <h3 class="text-xl font-bold text-white group-hover:text-primary transition">{{ edu.degree }}</h3>
-                            <span class="text-xs font-mono py-1 px-3 rounded-full bg-slate-900 text-primary border border-slate-800">{{ edu.year }}</span>
+                        <div class="bg-card p-6 rounded-2xl border border-slate-700/50 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5">
+                            <div class="flex flex-wrap justify-between items-start mb-2 gap-2">
+                                <h3 class="text-xl font-bold text-white group-hover:text-primary transition">{{ edu.degree }}</h3>
+                                <span class="text-xs font-mono py-1 px-3 rounded-full bg-slate-900 text-primary border border-slate-800">{{ edu.year }}</span>
+                            </div>
+                            <h4 class="text-lg text-slate-400 mb-3 flex items-center gap-2">
+                                <i class="{{ edu.icon }} text-accent"></i> {{ edu.institution }}
+                            </h4>
+                            <p class="text-slate-500 leading-relaxed">{{ edu.description }}</p>
                         </div>
-                        <h4 class="text-lg text-slate-400 mb-3 flex items-center gap-2">
-                            <i class="{{ edu.icon }} text-accent"></i> {{ edu.institution }}
-                        </h4>
-                        <p class="text-slate-500 leading-relaxed">{{ edu.description }}</p>
                     </div>
-                </div>
                 {% endfor %}
             </div>
         </div>
@@ -82,32 +201,32 @@
 
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-3xl font-mono font-bold text-center mb-12 text-white">
-                <span class="text-sky-400">02.</span> Certificates
+                <span class="text-sky-400">03.</span> Certificates
             </h2>
 
             <div class="swiper certificate-swiper w-full pb-12 px-4">
                 <div class="swiper-wrapper">
                     {% for cert in certificates %}
-                    <div class="swiper-slide w-[320px] h-[440px] bg-slate-800/60 backdrop-blur-md rounded-3xl border border-slate-700/50 p-8 flex flex-col items-center justify-center text-center transition-all duration-300 hover:border-primary/50 hover:bg-slate-800/80 shadow-2xl relative group">
+                        <div class="swiper-slide w-[320px] h-[440px] bg-slate-800/60 backdrop-blur-md rounded-3xl border border-slate-700/50 p-8 flex flex-col items-center justify-center text-center transition-all duration-300 hover:border-primary/50 hover:bg-slate-800/80 shadow-2xl relative group">
 
-                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
 
-                        <div class="w-24 h-24 rounded-2xl bg-slate-900/80 flex items-center justify-center mb-8 shadow-[0_0_20px_rgba(56,189,248,0.15)] group-hover:shadow-[0_0_30px_rgba(56,189,248,0.3)] transition-all border border-slate-700 group-hover:border-primary/30">
-                            <i class="fas fa-certificate text-5xl text-primary drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]"></i>
-                        </div>
+                            <div class="w-24 h-24 rounded-2xl bg-slate-900/80 flex items-center justify-center mb-8 shadow-[0_0_20px_rgba(56,189,248,0.15)] group-hover:shadow-[0_0_30px_rgba(56,189,248,0.3)] transition-all border border-slate-700 group-hover:border-primary/30">
+                                <i class="fas fa-certificate text-5xl text-primary drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]"></i>
+                            </div>
 
-                        <h5 class="text-2xl font-bold text-white mb-3 line-clamp-2 group-hover:text-primary transition-colors">
-                            {{ cert.title }}
-                        </h5>
+                            <h5 class="text-2xl font-bold text-white mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+                                {{ cert.title }}
+                            </h5>
 
-                        <p class="text-slate-300 text-sm mb-8 font-medium tracking-wide uppercase text-opacity-80">
-                            {{ cert.issuer }}
-                        </p>
+                            <p class="text-slate-300 text-sm mb-8 font-medium tracking-wide uppercase text-opacity-80">
+                                {{ cert.issuer }}
+                            </p>
 
-                        <span class="text-sm font-mono font-bold text-white bg-slate-700/50 px-5 py-2 rounded-full border border-slate-600 group-hover:border-primary/40 group-hover:bg-primary/10 transition-all">
+                            <span class="text-sm font-mono font-bold text-white bg-slate-700/50 px-5 py-2 rounded-full border border-slate-600 group-hover:border-primary/40 group-hover:bg-primary/10 transition-all">
                             {{ cert.year }}
                         </span>
-                    </div>
+                        </div>
                     {% endfor %}
                 </div>
                 <div class="swiper-pagination"></div>
@@ -117,7 +236,8 @@
 
     <section id="projects" class="py-20">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-3xl font-mono font-bold text-center mb-16 text-white"><span class="text-primary">03.</span> Projects</h2>
+            <h2 class="text-3xl font-mono font-bold text-center mb-16 text-white"><span class="text-primary">04.</span>
+                Projects</h2>
             {% include "portfolio/projects.html" %}
         </div>
     </section>
@@ -142,18 +262,25 @@
                     <div class="grid md:grid-cols-2 gap-5">
                         <div class="space-y-2">
                             <label class="text-sm font-medium text-slate-400">Name</label>
-                            <input type="text" name="name" class="w-full bg-bg border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition placeholder-slate-600" placeholder="Your Name" required>
+                            <input type="text" name="name"
+                                   class="w-full bg-bg border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition placeholder-slate-600"
+                                   placeholder="Your Name" required>
                         </div>
                         <div class="space-y-2">
                             <label class="text-sm font-medium text-slate-400">Email</label>
-                            <input type="email" name="email" class="w-full bg-bg border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition placeholder-slate-600" placeholder="you@example.com" required>
+                            <input type="email" name="email"
+                                   class="w-full bg-bg border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition placeholder-slate-600"
+                                   placeholder="you@example.com" required>
                         </div>
                     </div>
                     <div class="space-y-2">
                         <label class="text-sm font-medium text-slate-400">Message</label>
-                        <textarea name="message" rows="4" class="w-full bg-bg border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition placeholder-slate-600" placeholder="How can I help you?" required></textarea>
+                        <textarea name="message" rows="4"
+                                  class="w-full bg-bg border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition placeholder-slate-600"
+                                  placeholder="How can I help you?" required></textarea>
                     </div>
-                    <button type="submit" class="w-full bg-primary text-bg font-bold py-4 rounded-xl hover:bg-sky-400 transition transform hover:-translate-y-1 shadow-lg shadow-primary/20 flex justify-center items-center gap-2">
+                    <button type="submit"
+                            class="w-full bg-primary text-bg font-bold py-4 rounded-xl hover:bg-sky-400 transition transform hover:-translate-y-1 shadow-lg shadow-primary/20 flex justify-center items-center gap-2">
                         <span>Send Message</span>
                         <i class="fas fa-paper-plane text-sm"></i>
                     </button>
