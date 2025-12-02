@@ -69,6 +69,13 @@ def home(request):
 
     certificates_data = [
         {
+            'title': 'DSD II German Diploma',
+            'issuer': 'Der Kultusministerkonferenz',
+            'year': '2025',
+            'color': 'primary',
+            'url': 'https://drive.google.com/file/d/1nS3441KSGVEEvuNpMnQNFw2sIZGJR0Om/view?usp=sharing'
+        },
+        {
             'title': 'Python Fundamentals',
             'issuer': 'SoftUni',
             'year': '2024',
@@ -116,7 +123,7 @@ def home(request):
             'year': '2025',
             'color': 'primary',
             'url': 'https://softuni.bg/certificates/details/248897/5cb379ca'
-        },
+        }
     ]
 
     context = {
