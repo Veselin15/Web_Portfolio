@@ -44,25 +44,25 @@ def home(request):
     # Static Data
     education_data = [
         {
-            'institution': 'Technical University',
-            'degree': 'BSc Computer Science',
-            'year': '2019 - 2022',
-            'description': 'Algorithms, C++, OOP.',
+            'institution': 'Language Learning High School "EG Geo Milev"',
+            'degree': 'Primary Language: German; Secondary Language: English',
+            'year': '2020 - 2025',
+            'description': 'Elite Language Learning High School in Dobrich, Bulgaria',
+            'icon': 'fas fa-school'
+        },
+        {
+            'institution': 'Software University(SoftUni)',
+            'degree': 'Software Engineer with Python',
+            'year': '2022 - 2025',
+            'description': 'Python Basics; Python Fundamentals; Python Advanced; DataBases; Python Web',
             'icon': 'fas fa-graduation-cap'
         },
         {
-            'institution': 'Technical University',
-            'degree': 'SOFTUNI DJANGO PROFESSIONAL',
-            'year': '2025 - 2025',
-            'description': 'Algorithms, C++, OOP.',
-            'icon': 'fas fa-graduation-cap'
-        },
-        {
-            'institution': 'Master',
-            'degree': 'SOFTUNI DJANGO PROFESSIONAL',
-            'year': '2020 - 2023',
-            'description': 'Algorithms, C++, OOP.',
-            'icon': 'fas fa-graduation-cap'
+            'institution': 'Technical University Varna',
+            'degree': 'Information and Communication Technology',
+            'year': '2025 - 2029',
+            'description': 'One of the best Universities in Bulgaria',
+            'icon': 'fas fa-university'
         }
     ]
 
@@ -71,33 +71,17 @@ def home(request):
             'title': 'Python Advanced',
             'issuer': 'SoftUni',
             'year': '2023',
-            'color': 'primary'
+            'color': 'primary',
+            'url': 'https://softuni.bg/certificates/details/208709/6261a554'  # <--- Добави линк тук
         },
         {
             'title': 'Django Advanced',
             'issuer': 'SoftUni',
             'year': '2025',
-            'color': 'primary'
+            'color': 'primary',
+            'url': 'https://softuni.bg/certificates/details/221698/c2c87d1e'  # <--- И тук
         },
-        {
-            'title': 'Postgre SQL',
-            'issuer': 'SoftUni',
-            'year': '2024',
-            'color': 'primary'
-        },
-        {
-            'title': 'DSD II Diplom',
-            'issuer': 'Germany',
-            'year': '2024',
-            'color': 'primary'
-        },
-        {
-            'title': 'Python Fundamentals',
-            'issuer': 'SoftUni',
-            'year': '2023',
-            'color': 'primary'
-        }
-        # ... other items ...
+        # ... добави url на всички останали
     ]
 
     context = {

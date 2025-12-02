@@ -213,6 +213,14 @@
                     {% for cert in certificates %}
                         <div class="swiper-slide w-[320px] h-[440px] bg-slate-800/60 backdrop-blur-md rounded-3xl border border-slate-700/50 p-8 flex flex-col items-center justify-center text-center transition-all duration-300 hover:border-primary/50 hover:bg-slate-800/80 shadow-2xl relative group">
 
+                            {% if cert.url %}
+                                <a href="{{ cert.url }}" target="_blank"
+                                   class="absolute top-5 right-5 w-10 h-10 bg-slate-700/50 hover:bg-primary hover:text-bg text-primary rounded-full flex items-center justify-center transition-all duration-300 z-20 border border-slate-600 hover:border-primary shadow-lg"
+                                   title="Verify Certificate">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            {% endif %}
+
                             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50 group-hover:opacity-100 transition-opacity"></div>
 
                             <div class="w-24 h-24 rounded-2xl bg-slate-900/80 flex items-center justify-center mb-8 shadow-[0_0_20px_rgba(56,189,248,0.15)] group-hover:shadow-[0_0_30px_rgba(56,189,248,0.3)] transition-all border border-slate-700 group-hover:border-primary/30">
@@ -228,8 +236,9 @@
                             </p>
 
                             <span class="text-sm font-mono font-bold text-white bg-slate-700/50 px-5 py-2 rounded-full border border-slate-600 group-hover:border-primary/40 group-hover:bg-primary/10 transition-all">
-                            {{ cert.year }}
-                        </span>
+            {{ cert.year }}
+        </span>
+
                         </div>
                     {% endfor %}
                 </div>
