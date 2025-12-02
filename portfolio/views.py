@@ -5,6 +5,7 @@ from django.conf import settings
 from .models import Project
 from django.urls import reverse
 
+
 def home(request):
     """
     Renders the homepage and handles the Contact Form.
@@ -68,20 +69,54 @@ def home(request):
 
     certificates_data = [
         {
+            'title': 'Python Fundamentals',
+            'issuer': 'SoftUni',
+            'year': '2024',
+            'color': 'primary',
+            'url': 'https://softuni.bg/certificates/details/221698/c2c87d1e'
+        },
+        {
             'title': 'Python Advanced',
             'issuer': 'SoftUni',
-            'year': '2023',
+            'year': '2024',
             'color': 'primary',
-            'url': 'https://softuni.bg/certificates/details/208709/6261a554'  # <--- Добави линк тук
+            'url': 'https://softuni.bg/certificates/details/227651/e1ebd439'
+        },
+        {
+            'title': 'Python OOP',
+            'issuer': 'SoftUni',
+            'year': '2024',
+            'color': 'primary',
+            'url': 'https://softuni.bg/certificates/details/231822/70cd1167'
+        },
+        {
+            'title': 'Python ORM',
+            'issuer': 'SoftUni',
+            'year': '2025',
+            'color': 'primary',
+            'url': 'https://softuni.bg/certificates/details/240810/94c700fb'
+        },
+        {
+            'title': 'PostgreSQL',
+            'issuer': 'SoftUni',
+            'year': '2025',
+            'color': 'primary',
+            'url': 'https://softuni.bg/certificates/details/241385/21b4f6c5'
+        },
+        {
+            'title': 'Django Basics',
+            'issuer': 'SoftUni',
+            'year': '2025',
+            'color': 'primary',
+            'url': 'https://softuni.bg/certificates/details/246234/caf6a2c4'
         },
         {
             'title': 'Django Advanced',
             'issuer': 'SoftUni',
             'year': '2025',
             'color': 'primary',
-            'url': 'https://softuni.bg/certificates/details/221698/c2c87d1e'  # <--- И тук
+            'url': 'https://softuni.bg/certificates/details/248897/5cb379ca'
         },
-        # ... добави url на всички останали
     ]
 
     context = {
