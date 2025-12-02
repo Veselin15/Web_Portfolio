@@ -1,12 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    // 1. Certificates Slider (Coverflow Effect)
+    // 1. Certificates Slider
     var certSwiper = new Swiper(".certificate-swiper", {
         effect: "coverflow",
-        grabCursor: true,
         centeredSlides: true,
         slidesPerView: "auto",
         initialSlide: 1,
+        // DISABLE DRAGGING
+        allowTouchMove: false,
+        grabCursor: false,
+
         coverflowEffect: {
             rotate: 50,
             stretch: 0,
@@ -18,30 +21,43 @@ document.addEventListener('DOMContentLoaded', function () {
             el: ".swiper-pagination",
             clickable: true,
         },
+        // ENABLE ARROWS
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
         autoplay: {
             delay: 2500,
             disableOnInteraction: false,
         },
     });
 
-    // 2. Projects Slider (Standard Grid Carousel)
-    var projectSwiper = new Swiper(".project-swiper", {
-        slidesPerView: 1,
-        spaceBetween: 30, // Разстояние между картите
-        grabCursor: true,
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        breakpoints: {
-            // На таблет (>= 768px) -> 2 карти
-            768: {
-                slidesPerView: 2,
+    // 2. Projects Sliders (Initialize each separately to map arrows correctly)
+    document.querySelectorAll('.project-swiper').forEach(function(swiperElement) {
+        new Swiper(swiperElement, {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            // DISABLE DRAGGING
+            allowTouchMove: false,
+            grabCursor: false,
+
+            pagination: {
+                el: swiperElement.querySelector(".swiper-pagination"),
+                clickable: true,
             },
-            // На десктоп (>= 1024px) -> 3 карти
-            1024: {
-                slidesPerView: 3,
+            // ENABLE ARROWS (Scoped to this specific slider)
+            navigation: {
+                nextEl: swiperElement.querySelector(".swiper-button-next"),
+                prevEl: swiperElement.querySelector(".swiper-button-prev"),
             },
-        },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            },
+        });
     });
 });
