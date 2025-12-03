@@ -2,8 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
-from .models import Project
 from django.urls import reverse
+from .models import Project
+
+from .portfolio_data import EDUCATION_DATA, CERTIFICATES_DATA
 
 
 def home(request):
@@ -18,11 +20,9 @@ def home(request):
 
         if name and email and message:
             try:
-                # Construct the email
                 subject = f"Portfolio Message from {name}"
                 full_message = f"Sender Name: {name}\nSender Email: {email}\n\nMessage:\n{message}"
 
-                # Send email to yourself (EMAIL_HOST_USER)
                 send_mail(
                     subject,
                     full_message,
@@ -39,98 +39,17 @@ def home(request):
             messages.error(request, "Please fill in all fields.")
 
     # --- LOAD DATA FOR TEMPLATE ---
+
+    # 1. Dynamic Data (from Database)
     software_projects = Project.objects.filter(category='SW')
     electronics_projects = Project.objects.filter(category='EL')
 
-    # Static Data
-    education_data = [
-        {
-            'institution': 'Language Learning High School "EG Geo Milev"',
-            'degree': 'Primary Language: German; Secondary Language: English',
-            'year': '2020 - 2025',
-            'description': 'Elite Language Learning High School in Dobrich, Bulgaria',
-            'icon': 'fas fa-school'
-        },
-        {
-            'institution': 'Software University(SoftUni)',
-            'degree': 'Software Engineer with Python',
-            'year': '2022 - 2025',
-            'description': 'Python Basics; Python Fundamentals; Python Advanced; DataBases; Python Web',
-            'icon': 'fas fa-graduation-cap'
-        },
-        {
-            'institution': 'Technical University Varna',
-            'degree': 'Information and Communication Technology',
-            'year': '2025 - 2029',
-            'description': 'One of the best Universities in Bulgaria',
-            'icon': 'fas fa-university'
-        }
-    ]
-
-    certificates_data = [
-        {
-            'title': 'DSD II German Diploma',
-            'issuer': 'Der Kultusministerkonferenz',
-            'year': '2025',
-            'color': 'primary',
-            'url': 'https://drive.google.com/file/d/1nS3441KSGVEEvuNpMnQNFw2sIZGJR0Om/view?usp=sharing'
-        },
-        {
-            'title': 'Python Fundamentals',
-            'issuer': 'SoftUni',
-            'year': '2024',
-            'color': 'primary',
-            'url': 'https://softuni.bg/certificates/details/221698/c2c87d1e'
-        },
-        {
-            'title': 'Python Advanced',
-            'issuer': 'SoftUni',
-            'year': '2024',
-            'color': 'primary',
-            'url': 'https://softuni.bg/certificates/details/227651/e1ebd439'
-        },
-        {
-            'title': 'Python OOP',
-            'issuer': 'SoftUni',
-            'year': '2024',
-            'color': 'primary',
-            'url': 'https://softuni.bg/certificates/details/231822/70cd1167'
-        },
-        {
-            'title': 'Python ORM',
-            'issuer': 'SoftUni',
-            'year': '2025',
-            'color': 'primary',
-            'url': 'https://softuni.bg/certificates/details/240810/94c700fb'
-        },
-        {
-            'title': 'PostgreSQL',
-            'issuer': 'SoftUni',
-            'year': '2025',
-            'color': 'primary',
-            'url': 'https://softuni.bg/certificates/details/241385/21b4f6c5'
-        },
-        {
-            'title': 'Django Basics',
-            'issuer': 'SoftUni',
-            'year': '2025',
-            'color': 'primary',
-            'url': 'https://softuni.bg/certificates/details/246234/caf6a2c4'
-        },
-        {
-            'title': 'Django Advanced',
-            'issuer': 'SoftUni',
-            'year': '2025',
-            'color': 'primary',
-            'url': 'https://softuni.bg/certificates/details/248897/5cb379ca'
-        }
-    ]
-
+    # 2. Static Data (from portfolio_data.py)
     context = {
         'software_projects': software_projects,
         'electronics_projects': electronics_projects,
-        'education': education_data,
-        'certificates': certificates_data,
+        'education': EDUCATION_DATA,
+        'certificates': CERTIFICATES_DATA,
     }
 
     return render(request, 'portfolio/index.html', context)
