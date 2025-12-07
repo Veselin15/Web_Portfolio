@@ -1,0 +1,46 @@
+/* static/portfolio/css/swiper.css */
+
+.certificate-swiper {
+    padding: 40px 0 60px 0;
+}
+
+/* Прилагаме ефектите само за СЕРТИФИКАТИТЕ */
+.certificate-swiper .swiper-slide {
+    opacity: 0.5;
+    transform: scale(0.9) translateY(10px);
+    filter: blur(1px);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.certificate-swiper .swiper-slide-active {
+    opacity: 1;
+    transform: scale(1.05) translateY(0);
+    filter: blur(0);
+    z-index: 10;
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5),
+                0 0 30px -5px rgba(56, 189, 248, 0.15);
+}
+
+/* Стилове за ПРОЕКТИТЕ (нормален вид, без блър) */
+.project-swiper {
+    padding-bottom: 50px; /* Място за точките */
+}
+
+.project-swiper .swiper-slide {
+    height: auto; /* Важно за flex разтягането */
+}
+
+/* Общи стилове за пагинацията */
+.swiper-pagination-bullet {
+    background: #475569 !important;
+    opacity: 0.5;
+    transition: all 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+    background: #38bdf8 !important;
+    opacity: 1;
+    width: 30px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+}

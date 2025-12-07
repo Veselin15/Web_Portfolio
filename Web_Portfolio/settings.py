@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-5j$arf(bizir6uvx=ue+f(ws7k%-5bzg_&(yj9m!n7glzrwz)q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['veselin-veselinov.com', 'www.veselin-veselinov.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -161,3 +161,6 @@ CKEDITOR_CONFIGS = {
         'width': '100%',
     },
 }
+
+
+CSRF_TRUSTED_ORIGINS = ['https://veselin-veselinov.com', 'https://www.veselin-veselinov.com']

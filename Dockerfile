@@ -1,5 +1,5 @@
 # 1. Use the official Python image (lightweight and fast)
-FROM python:3.10-slim
+FROM python:3.10-slim-bookworm
 
 # 2. Install system dependencies (required for PostgreSQL and others)
 RUN apt-get update && apt-get install -y \
