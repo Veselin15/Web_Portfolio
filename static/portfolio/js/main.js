@@ -24,6 +24,7 @@ function toggleMobileMenu() {
         body.style.overflow = 'auto';
     }
 }
+
 // document.addEventListener('DOMContentLoaded', function () {
 //
 //     // 1. Initialize AOS (Animate On Scroll)
