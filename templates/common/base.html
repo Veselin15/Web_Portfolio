@@ -78,20 +78,36 @@
         </div>
     </div>
 
-    <div class=" md:hidden bg-[#0f172a] border-b border-slate-700 absolute w-full left-0 top-20 shadow-2xl z-50"
+<div class="hidden md:hidden fixed left-0 top-20 w-full h-[calc(100vh-80px)] bg-slate-900/95 backdrop-blur-xl border-t border-slate-800 shadow-2xl z-40 overflow-y-auto"
          id="mobile-menu">
-        <div class="px-4 pt-4 pb-6 space-y-2 flex flex-col">
+
+        <div class="flex flex-col items-center justify-center pt-10 pb-20 space-y-6 px-6">
             <a href="{% url 'home' %}#about" onclick="toggleMobileMenu()"
-               class="block text-slate-300 hover:text-white hover:bg-slate-800 px-4 py-3 rounded-lg text-base font-bold transition-colors border-b border-slate-800">About</a>
+               class="text-2xl font-bold text-slate-300 hover:text-white hover:scale-110 transition-all duration-300">
+               About
+            </a>
+
             <a href="{% url 'home' %}#education" onclick="toggleMobileMenu()"
-               class="block text-slate-300 hover:text-white hover:bg-slate-800 px-4 py-3 rounded-lg text-base font-bold transition-colors border-b border-slate-800">Education</a>
+               class="text-2xl font-bold text-slate-300 hover:text-white hover:scale-110 transition-all duration-300">
+               Education
+            </a>
+
             <a href="{% url 'home' %}#certificates" onclick="toggleMobileMenu()"
-               class="block text-slate-300 hover:text-white hover:bg-slate-800 px-4 py-3 rounded-lg text-base font-bold transition-colors border-b border-slate-800">Certificates</a>
+               class="text-2xl font-bold text-slate-300 hover:text-white hover:scale-110 transition-all duration-300">
+               Certificates
+            </a>
+
             <a href="{% url 'home' %}#projects" onclick="toggleMobileMenu()"
-               class="block text-slate-300 hover:text-white hover:bg-slate-800 px-4 py-3 rounded-lg text-base font-bold transition-colors border-b border-slate-800">Projects</a>
+               class="text-2xl font-bold text-slate-300 hover:text-white hover:scale-110 transition-all duration-300">
+               Projects
+            </a>
+
+            <div class="w-16 h-1 bg-slate-800 rounded-full my-4"></div>
+
             <a href="{% url 'home' %}#contact" onclick="toggleMobileMenu()"
-               class="block mt-4 text-center bg-primary text-slate-900 font-extrabold px-4 py-3 rounded-lg hover:bg-white transition-colors shadow-lg">Contact
-                Me</a>
+               class="px-8 py-4 rounded-2xl bg-primary text-bg font-bold text-xl shadow-lg shadow-primary/20 active:scale-95 transition-transform w-full text-center max-w-xs">
+                Contact Me
+            </a>
         </div>
     </div>
 </nav>
