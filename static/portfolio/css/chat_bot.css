@@ -1,17 +1,22 @@
 /* --- MODERN FLOATING CHAT --- */
 
-/* Контейнерът стои долу вдясно */
 #chat-container {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 20px;
+    right: 20px;
     z-index: 10000;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
 
-/* Кръглият бутон */
+@media (max-width: 400px) {
+    #chat-window-wrapper {
+        width: 300px;
+        right: 0;
+    }
+}
+
 #chat-toggle-btn {
     width: 60px;
     height: 60px;
@@ -31,14 +36,13 @@
     box-shadow: 0 15px 35px rgba(56, 189, 248, 0.6);
 }
 
-/* Прозорецът на чата */
 #chat-window-wrapper {
     width: 350px;
     background-color: #1e293b; /* Dark Card */
     border: 1px solid #334155;
     border-radius: 1rem;
     overflow: hidden;
-    margin-bottom: 20px; /* Разстояние от бутона */
+    margin-bottom: 20px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.5);
     transform-origin: bottom right;
     transition: all 0.3s ease;
@@ -46,7 +50,6 @@
     transform: scale(1);
 }
 
-/* Клас за скриване */
 .hidden {
     display: none;
     opacity: 0;
@@ -84,14 +87,14 @@
 .msg.user {
     background-color: #38bdf8;
     color: #0f172a;
-    align-self: flex-end; /* Дясно */
+    align-self: flex-end;
     border-bottom-right-radius: 0;
 }
 
 .msg.bot {
     background-color: #334155;
     color: #e2e8f0;
-    align-self: flex-start; /* Ляво */
+    align-self: flex-start;
     border-bottom-left-radius: 0;
 }
 
