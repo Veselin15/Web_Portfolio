@@ -12,7 +12,8 @@ Keep answers concise, professional, and friendly.
 ABOUT VESELIN:
 - Name: Veselin Veselinov  
 - Role: Junior Software Developer / Junior Python Developer 
-- Location: Dobrich, Bulgaria 
+- Location: Dobrich/Varna, Bulgaria 
+- Born: 14.11.2006
 - Contact Information:
   - LinkedIn: linkedin.com/in/veselin-veselinov-a7bb9930a 
   - GitHub: github.com/Veselin15 
