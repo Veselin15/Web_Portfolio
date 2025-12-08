@@ -3,79 +3,85 @@
 {% block title %}{{ project.title }} | Vlado.Dev{% endblock %}
 
 {% block content %}
-<div class="max-w-6xl mx-auto px-6 pt-32 pb-24">
-    <div class="mb-12">
-        <a href="{% url 'home' %}#projects" class="inline-flex items-center gap-2 text-slate-400 hover:text-primary transition mb-8 group">
-            <i class="fas fa-arrow-left group-hover:-translate-x-1 transition-transform"></i> Back to Projects
+<div class="container mx-auto px-4 pt-10 pb-24"> <div class="mb-8">
+        <a href="{% url 'home' %}#projects" class="btn btn-ghost gap-2 pl-0 hover:pl-2 transition-all">
+            <i class="fas fa-arrow-left"></i> Back to Projects
         </a>
+    </div>
 
-        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">{{ project.title }}</h1>
-
-        <div class="flex flex-wrap gap-4 text-sm font-mono">
-            <span class="px-3 py-1 rounded-full bg-slate-800 text-primary border border-slate-700">{{ project.get_category_display }}</span>
-            <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700">Started: {{ project.start_date|date:"F Y" }}</span>
+    <div class="mb-12">
+        <div class="flex flex-wrap gap-2 mb-4">
+            <div class="badge badge-primary badge-outline">{{ project.get_category_display }}</div>
+            <div class="badge badge-ghost">Started: {{ project.start_date|date:"F Y" }}</div>
         </div>
+        <h1 class="text-4xl md:text-6xl font-black mb-6">{{ project.title }}</h1>
     </div>
 
     <div class="grid lg:grid-cols-3 gap-12">
-        <div class="lg:col-span-2">
+
+        <div class="lg:col-span-2 space-y-8">
             {% if project.image %}
-                <div class="rounded-2xl overflow-hidden border border-slate-700 shadow-2xl mb-10">
+                <div class="rounded-3xl overflow-hidden shadow-2xl border border-base-200">
                     <img src="{{ project.image.url }}" class="w-full object-cover" alt="{{ project.title }}">
                 </div>
             {% endif %}
 
-            <div class="prose prose-invert prose-lg max-w-none text-slate-300 prose-headings:font-mono prose-a:text-primary prose-img:rounded-xl prose-img:w-full prose-iframe:w-full">
+            <article class="prose prose-invert prose-lg max-w-none prose-img:rounded-xl">
                 {{ project.detailed_content|safe }}
-            </div>
+            </article>
 
             {% if project.gallery_images.all %}
-                <div class="mt-16 pt-8 border-t border-slate-800">
-                    <h3 class="text-2xl font-bold text-white mb-6 font-mono">Project Gallery</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {% for img in project.gallery_images.all %}
-                            <div class="space-y-2 group">
-                                <a href="{{ img.image.url }}" target="_blank" class="block overflow-hidden rounded-xl border border-slate-700">
-                                    <img src="{{ img.image.url }}" class="w-full h-56 object-cover transition duration-500 group-hover:scale-105" alt="Gallery image">
-                                </a>
-                                {% if img.caption %}
-                                    <p class="text-center text-xs text-slate-500">{{ img.caption }}</p>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
-                    </div>
+                <div class="divider my-10"></div>
+                <h3 class="text-2xl font-bold mb-6 font-mono">Project Gallery</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {% for img in project.gallery_images.all %}
+                        <a href="{{ img.image.url }}" target="_blank" class="card bg-base-200 hover:scale-105 transition-transform duration-300 overflow-hidden shadow-lg border border-base-content/10">
+                            <figure><img src="{{ img.image.url }}" class="w-full h-48 object-cover" alt="Gallery"></figure>
+                            {% if img.caption %}
+                                <div class="card-body p-3 text-center text-xs opacity-70">
+                                    {{ img.caption }}
+                                </div>
+                            {% endif %}
+                        </a>
+                    {% endfor %}
                 </div>
             {% endif %}
         </div>
 
-        <aside class="space-y-8">
-            <div class="bg-card p-6 rounded-2xl border border-slate-700 lg:sticky lg:top-24">
-                <h4 class="text-lg font-bold text-white mb-6 font-mono border-b border-slate-700 pb-2">Technical Details</h4>
+        <aside class="space-y-6">
+            <div class="card bg-base-200 shadow-xl border border-base-content/5 lg:sticky lg:top-28">
+                <div class="card-body">
+                    <h2 class="card-title text-primary border-b border-base-content/10 pb-2 mb-4">
+                        Technical Details
+                    </h2>
 
-                <div class="space-y-6">
-                    <div>
-                        <p class="text-xs text-slate-500 uppercase tracking-wider font-bold mb-2">Tech Stack</p>
+                    <div class="mb-4">
+                        <div class="text-xs uppercase font-bold opacity-50 mb-2">Tech Stack</div>
                         <div class="flex flex-wrap gap-2">
-                             <span class="px-2 py-1 bg-slate-900 rounded text-sm text-accent border border-slate-800">{{ project.tech_stack }}</span>
+                            {% if project.tech_stack %}
+                                <div class="badge badge-neutral p-3">{{ project.tech_stack }}</div>
+                            {% else %}
+                                <span class="opacity-50">Not specified</span>
+                            {% endif %}
                         </div>
                     </div>
 
-                    <div>
-                        <p class="text-xs text-slate-500 uppercase tracking-wider font-bold mb-2">Status</p>
+                    <div class="mb-6">
+                        <div class="text-xs uppercase font-bold opacity-50 mb-2">Status</div>
                         {% if project.end_date %}
-                            <div class="flex items-center gap-2 text-green-400 text-sm font-mono">
-                                <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div> Completed
+                            <div class="badge badge-success gap-2">
+                                <div class="w-2 h-2 bg-white rounded-full"></div> Completed
                             </div>
                         {% else %}
-                            <div class="flex items-center gap-2 text-yellow-400 text-sm font-mono">
-                                <div class="w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></div> Ongoing
+                            <div class="badge badge-warning gap-2">
+                                <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div> Ongoing
                             </div>
                         {% endif %}
                     </div>
 
                     {% if project.url %}
-                        <div class="pt-6 mt-6 border-t border-slate-700">
-                            <a href="{{ project.url }}" target="_blank" class="w-full py-3 rounded-xl bg-primary text-bg font-bold text-center block hover:bg-sky-400 transition shadow-lg shadow-primary/20">
+                        <div class="card-actions justify-end mt-4">
+                            <a href="{{ project.url }}" target="_blank" class="btn btn-primary btn-block shadow-lg shadow-primary/20">
                                 View Source <i class="fas fa-external-link-alt ml-2"></i>
                             </a>
                         </div>
