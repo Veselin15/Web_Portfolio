@@ -3,7 +3,8 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
 from django.urls import reverse
-from .models import Project
+# Увери се, че си добавил Profile тук!
+from .models import Project, Profile
 
 from .portfolio_data import EDUCATION_DATA, CERTIFICATES_DATA
 
@@ -38,20 +39,32 @@ def home(request):
         else:
             messages.error(request, "Please fill in all fields.")
 
+    # ⚠️ ВАЖНО: Този код трябва да е НАЗАД (на нивото на 'def' и 'if'),
+    # а не вътре в 'if'-а!
+
     # --- LOAD DATA FOR TEMPLATE ---
 
     # 1. Dynamic Data (from Database)
     software_projects = Project.objects.filter(category='SW')
     electronics_projects = Project.objects.filter(category='EL')
 
-    # 2. Static Data (from portfolio_data.py)
+    # 2. Profile Data (Взимаме снимката)
+    # Слагаме го в try/except, за да не гърми, ако още не си направил миграциите
+    try:
+        profile = Profile.objects.first()
+    except:
+        profile = None
+
+    # 3. Static Data
     context = {
         'software_projects': software_projects,
         'electronics_projects': electronics_projects,
         'education': EDUCATION_DATA,
         'certificates': CERTIFICATES_DATA,
+        'profile': profile,
     }
 
+    # Този ред трябва да е ПОДРАВНЕН с началото на функцията!
     return render(request, 'portfolio/index.html', context)
 
 

@@ -43,3 +43,14 @@ class ProjectImage(models.Model):
 
     def __str__(self):
         return f"Image for {self.project.title}"
+
+
+class Profile(models.Model):
+    image = models.ImageField(upload_to='profile/')
+    cv_file = models.FileField(upload_to='cv/', blank=True, null=True)
+
+    def __str__(self):
+        return "My Profile Settings"
+
+    class Meta:
+        verbose_name_plural = "Profile Settings"
