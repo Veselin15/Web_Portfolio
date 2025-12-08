@@ -1,94 +1,134 @@
 {% extends 'portfolio/../common/base.html' %}
+{% load static %}
 
-{% block title %}{{ project.title }} | Vlado.Dev{% endblock %}
+{% block title %}{{ project.title }} | Veselin's Portfolio{% endblock %}
 
 {% block content %}
-<div class="container mx-auto px-4 pt-10 pb-24"> <div class="mb-8">
-        <a href="{% url 'home' %}#projects" class="btn btn-ghost gap-2 pl-0 hover:pl-2 transition-all">
-            <i class="fas fa-arrow-left"></i> Back to Projects
-        </a>
-    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    <div class="mb-12">
-        <div class="flex flex-wrap gap-2 mb-4">
-            <div class="badge badge-primary badge-outline">{{ project.get_category_display }}</div>
-            <div class="badge badge-ghost">Started: {{ project.start_date|date:"F Y" }}</div>
-        </div>
-        <h1 class="text-4xl md:text-6xl font-black mb-6">{{ project.title }}</h1>
-    </div>
+        <div class="flex flex-col gap-6 mb-10">
+            <a href="{% url 'home' %}#projects"
+               class="btn btn-ghost btn-sm w-fit gap-2 hover:bg-slate-800 text-slate-400 hover:text-white transition-all">
+                <i class="fas fa-arrow-left"></i> Back to Projects
+            </a>
 
-    <div class="grid lg:grid-cols-3 gap-12">
-
-        <div class="lg:col-span-2 space-y-8">
-            {% if project.image %}
-                <div class="rounded-3xl overflow-hidden shadow-2xl border border-base-200">
-                    <img src="{{ project.image.url }}" class="w-full object-cover" alt="{{ project.title }}">
+            <div class="border-l-4 border-sky-400 pl-6 py-2">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="badge badge-primary badge-outline font-bold">{{ project.get_category_display }}</span>
+                    <span class="text-slate-500 text-sm font-mono"><i
+                            class="far fa-calendar-alt mr-1"></i> {{ project.start_date|date:"M Y" }}</span>
                 </div>
-            {% endif %}
+                <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight">{{ project.title }}</h1>
+            </div>
+        </div>
 
-            <article class="prose prose-invert prose-lg max-w-none prose-img:rounded-xl">
-                {{ project.detailed_content|safe }}
-            </article>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
 
-            {% if project.gallery_images.all %}
-                <div class="divider my-10"></div>
-                <h3 class="text-2xl font-bold mb-6 font-mono">Project Gallery</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {% for img in project.gallery_images.all %}
-                        <a href="{{ img.image.url }}" target="_blank" class="card bg-base-200 hover:scale-105 transition-transform duration-300 overflow-hidden shadow-lg border border-base-content/10">
-                            <figure><img src="{{ img.image.url }}" class="w-full h-48 object-cover" alt="Gallery"></figure>
-                            {% if img.caption %}
-                                <div class="card-body p-3 text-center text-xs opacity-70">
-                                    {{ img.caption }}
+            <div class="lg:col-span-2 space-y-10">
+
+                {% if project.image %}
+                    <div class="rounded-2xl overflow-hidden shadow-2xl border border-slate-700/50 bg-slate-800 group">
+                        <img src="{{ project.image.url }}" alt="{{ project.title }}"
+                             class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.01]">
+                    </div>
+                {% endif %}
+
+                <div class="prose prose-lg prose-invert max-w-none
+                        prose-headings:text-sky-400 prose-headings:font-bold prose-headings:font-mono
+                        prose-p:text-slate-300 prose-p:leading-relaxed
+                        prose-a:text-sky-400 prose-a:no-underline hover:prose-a:underline
+                        prose-strong:text-white prose-code:text-accent prose-code:bg-slate-800 prose-code:px-1 prose-code:rounded
+                        prose-img:rounded-xl prose-img:shadow-lg">
+                    {{ project.detailed_content|safe }}
+                </div>
+
+                {% if project.gallery_images.all %}
+                    <div class="pt-8 border-t border-slate-800">
+                        <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                            <i class="fas fa-images text-sky-500"></i> Gallery
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {% for img in project.gallery_images.all %}
+                                <a href="{{ img.image.url }}" target="_blank"
+                                   class="group relative overflow-hidden rounded-xl border border-slate-700 shadow-md">
+                                    <div class="aspect-video">
+                                        <img src="{{ img.image.url }}" alt="Gallery image"
+                                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                    </div>
+                                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                        <i class="fas fa-expand text-white text-2xl drop-shadow-md"></i>
+                                    </div>
+                                    {% if img.caption %}
+                                        <div class="absolute bottom-0 left-0 w-full bg-black/80 p-2 text-xs text-center text-slate-300 backdrop-blur-sm">
+                                            {{ img.caption }}
+                                        </div>
+                                    {% endif %}
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="lg:col-span-1">
+                <div class="sticky top-24 space-y-6">
+
+                    <div class="card bg-slate-800/50 backdrop-blur border border-slate-700 shadow-xl overflow-hidden">
+                        <div class="card-body p-6 gap-6">
+
+                            <div>
+                                <h3 class="text-xs uppercase font-bold text-slate-500 mb-2 tracking-wider">Project
+                                    Status</h3>
+                                {% if project.end_date %}
+                                    <div class="badge badge-success badge-lg h-auto w-full justify-start text-white font-bold p-3 gap-3">
+                                        <i class="fas fa-check-circle text-lg"></i>
+                                        <span>Completed</span>
+                                    </div>
+                                {% else %}
+                                    <div class="badge badge-warning badge-lg h-auto w-full justify-start text-slate-900 font-bold p-3 gap-3 animate-pulse">
+                                        <i class="fas fa-sync-alt fa-spin text-lg"></i>
+                                        <span>Ongoing</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            {% if project.tech_stack %}
+                                <div>
+                                    <h3 class="text-xs uppercase font-bold text-slate-500 mb-3 tracking-wider">Tech
+                                        Stack</h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        {% comment %}
+                                   Забележка: Това предполага, че project.tech_stack е стринг.
+                                   Ако искаш да е красиво, просто го показваме в контейнер.
+                                {% endcomment %}
+                                        <div class="p-3 bg-slate-900 rounded-lg border border-slate-700 text-sm text-sky-300 font-mono w-full leading-relaxed">
+                                            {{ project.tech_stack }}
+                                        </div>
+                                    </div>
                                 </div>
                             {% endif %}
-                        </a>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        </div>
 
-        <aside class="space-y-6">
-            <div class="card bg-base-200 shadow-xl border border-base-content/5 lg:sticky lg:top-28">
-                <div class="card-body">
-                    <h2 class="card-title text-primary border-b border-base-content/10 pb-2 mb-4">
-                        Technical Details
-                    </h2>
-
-                    <div class="mb-4">
-                        <div class="text-xs uppercase font-bold opacity-50 mb-2">Tech Stack</div>
-                        <div class="flex flex-wrap gap-2">
-                            {% if project.tech_stack %}
-                                <div class="badge badge-neutral p-3">{{ project.tech_stack }}</div>
-                            {% else %}
-                                <span class="opacity-50">Not specified</span>
+                            {% if project.url %}
+                                <div class="pt-4 border-t border-slate-700">
+                                    <a href="{{ project.url }}" target="_blank"
+                                       class="btn btn-primary btn-block text-slate-900 font-bold text-lg shadow-lg shadow-sky-900/50 hover:shadow-sky-500/20">
+                                        View Source <i class="fas fa-external-link-alt ml-1"></i>
+                                    </a>
+                                </div>
                             {% endif %}
                         </div>
                     </div>
 
-                    <div class="mb-6">
-                        <div class="text-xs uppercase font-bold opacity-50 mb-2">Status</div>
-                        {% if project.end_date %}
-                            <div class="badge badge-success gap-2">
-                                <div class="w-2 h-2 bg-white rounded-full"></div> Completed
-                            </div>
-                        {% else %}
-                            <div class="badge badge-warning gap-2">
-                                <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div> Ongoing
-                            </div>
-                        {% endif %}
+                    <div class="card bg-gradient-to-br from-indigo-900/40 to-slate-900 border border-indigo-500/30 p-6 text-center">
+                        <h4 class="font-bold text-white mb-2">Interested in this?</h4>
+                        <a href="{% url 'home' %}#contact"
+                           class="btn btn-outline btn-sm text-indigo-300 border-indigo-500 hover:bg-indigo-500 hover:text-white hover:border-indigo-500">
+                            Lets Talk
+                        </a>
                     </div>
 
-                    {% if project.url %}
-                        <div class="card-actions justify-end mt-4">
-                            <a href="{{ project.url }}" target="_blank" class="btn btn-primary btn-block shadow-lg shadow-primary/20">
-                                View Source <i class="fas fa-external-link-alt ml-2"></i>
-                            </a>
-                        </div>
-                    {% endif %}
                 </div>
             </div>
-        </aside>
+        </div>
     </div>
-</div>
 {% endblock %}

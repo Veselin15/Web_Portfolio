@@ -25,6 +25,35 @@ function toggleMobileMenu() {
     }
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+
+    // 1. Initialize AOS (Animate On Scroll)
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+    }
+
+    // 2. ИНТЕРАКТИВНИЯТ ТЕКСТ (Typed.js)
+    const typedElement = document.getElementById('typed-text');
+    if (typedElement && typeof Typed !== 'undefined') {
+        new Typed('#typed-text', {
+            strings: [
+                'Python Developer',
+                'Django Specialist',
+                'FastAPI Ninja',
+                'Hardware Enthusiast',
+                'PostgreSQL Master',
+                'Automation Expert'
+            ],
+            typeSpeed: 50,   // Скорост на писане
+            backSpeed: 30,   // Скорост на триене
+            backDelay: 1500, // Колко време чака преди да изтрие
+            loop: true       // Да се върти ли безкрайно
+        });
+    }
+});
 // document.addEventListener('DOMContentLoaded', function () {
 //
 //     // 1. Initialize AOS (Animate On Scroll)
