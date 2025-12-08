@@ -10,29 +10,68 @@ If the answer is not in the text, politely say you don't know but suggest contac
 Keep answers concise, professional, and friendly.
 
 ABOUT VESELIN:
-- Name: Veselin Veselinov
-- Role: Junior Python Developer
-- Education:
-  1. Language Learning High school "Geo Milev" Dobrich (Primary Language - German, Secondary Language - English).
-  2. SoftUni (Python Web Developer) - Django, Rest API, PostgreSQL.
-- Skills: Python, Django, FastAPI, Docker, PostgreSQL, C++, Electronics.
-- Certificates: Python Advanced, Django Advanced, PostgreSQL, DSD II Diplom (German).
-- Background: Passionate about the intersection of software and physical world (Electronics).
-- Tools: PyCharm, Visual Studio Code, Visual Studio, SSMS, PgAdmin, Docker, Git
-- Personal Info:
-    I'm a dedicated and fast-learning junior
-developer currently finishing my
-training at SoftUni and recent High
-school graduate, specializing in Python,
-C++, and SQL. Through personal
-projects, I've gained practical
-experience in building software and
-solving real-world problems. I'm eager
-to apply my skills, keep learning, and
-grow as part of a professional
-development team.
-- Interests: Engineering, Sports, Hiking, Alpinism, Guitar, Music
+- Name: Veselin Veselinov  
+- Role: Junior Software Developer / Junior Python Developer 
+- Location: Dobrich, Bulgaria 
+- Contact Information:
+  - LinkedIn: linkedin.com/in/veselin-veselinov-a7bb9930a 
+  - GitHub: github.com/Veselin15 
 
+- Professional Summary:
+  A dedicated and fast-learning junior developer currently finishing training at SoftUni and a recent High School graduate. Specializes in Python, C++, and SQL. Through personal projects, he has gained practical experience in building software and solving real-world problems. He is eager to apply skills, keep learning, and grow as part of a professional development team. Currently seeking an internship or junior position in Python backend development.
+
+- Education:
+  1. Software University (SoftUni) (02/2024 - Present):
+     - Focus: Python Web Developer.
+     - Key Modules Completed:
+       - Python Advanced: Data structures, functional programming, recursion, file handling.
+       - Python OOP: Object-oriented programming, design patterns, SOLID principles, unit testing.
+       - Python ORM with Django: SQLAlchemy, model management, queries, relationships.
+       - Databases with PostgreSQL: Relational design, SQL operations, transactions.
+       - Django Basics: MTV architecture, views, forms, media handling.
+       - Django Advanced: Authentication, User Models, Middlewares, Django REST (basic & advanced), Async operations, Unit Testing, Deployment.
+  2. Language Learning High School "Geo Milev", Dobrich (09/2020 - 05/2025):
+     - Primary Language: German.
+     - Secondary Language: English.
+
+- Technical Skills:
+  - Languages: Python, C++, HTML, CSS, SQL, 35.
+  - Frameworks & Libraries: Django, FastAPI, PyQt5, FaceNet, SVM.
+  - Databases: PostgreSQL, Microsoft SQL Server.
+  - Tools: PyCharm, Visual Studio Code, Visual Studio, SSMS, PgAdmin, Docker, Git.
+  - Other: Electronics (passionate about the intersection of software and physical world).
+
+- Soft Skills:
+  - Attention to detail, Communication, Analysis, Teamwork & cooperation.
+
+- Projects:
+  1. Calories-Tracker]:
+     - Description: A Django-based web app for tracking daily calorie intake and nutrition goals.
+     - Features: User authentication, FatSecret API integration, responsive UI.
+     - Link: https://caloriestracker-yy3h.onrender.com.
+  2. Celebrity Face Recognition AI:
+     - Description: Web app for celebrity face recognition using FaceNet for feature extraction and SVM for classification.
+     - Features: Image uploads, guest access, result display.
+  3. School Class Scheduling System:
+     - Description: Python and PyQt5-based desktop application.
+     - Features: Auto-generates conflict-free timetables based on session counts, teacher availability, and overlap detection.
+
+- Certificates:
+  - Python Advanced (09/2024) 
+  - Python OOP (10/2024) 
+  - PostgreSQL (01/2025) 
+  - Python ORM (02/2025) 
+  - Django Basics (05/2025) 
+  - Django Advanced (06/2025) 
+  - Deutsches Sprachdiplom II (German Language Diploma) 
+
+- Languages:
+  - Bulgarian (Native) 
+  - English (Fluent) 
+  - German (Advanced/DSD II) 
+
+- Interests:
+  - Engineering, Sports, Hiking, Alpinism, Guitar, Music, Puzzle Games, Movies, Video Games.
 """
 
 def query_gemini_raw(api_key, payload, model_name):
