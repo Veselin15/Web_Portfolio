@@ -1,7 +1,15 @@
 {% extends 'portfolio/../common/base.html' %}
 {% load static %}
 
-{% block title %}{{ project.title }} | Veselin's Portfolio{% endblock %}
+{% block title %}{{ project.title }} | Veselin Dev{% endblock %}
+
+{% block meta_description %}{{ project.description|truncatewords:25 }}{% endblock %}
+
+{% block og_title %}{{ project.title }} - Case Study{% endblock %}
+{% block og_description %}{{ project.description|truncatewords:30 }}{% endblock %}
+{% if project.image %}
+    {% block og_image %}{{ request.scheme }}://{{ request.get_host }}{{ project.image.url }}{% endblock %}
+{% endif %}
 
 {% block content %}
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
-
+from django.urls import reverse
 
 class Project(models.Model):
     CATEGORY_CHOICES = [
@@ -26,6 +26,9 @@ class Project(models.Model):
 
     class Meta:
         ordering = ['-start_date']
+
+    def get_absolute_url(self):
+        return reverse('project_detail', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:
