@@ -36,7 +36,10 @@
 
                 {% if project.image %}
                     <div class="rounded-2xl overflow-hidden shadow-2xl border border-slate-700/50 bg-slate-800 group">
-                        <img src="{{ project.image.url }}" alt="{{ project.title }}"
+                        <img src="{{ project.image.url }}"
+                             alt="{{ project.title }}"
+                             fetchpriority="high"
+                             width="800" height="600"
                              class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.01]">
                     </div>
                 {% endif %}
@@ -51,30 +54,17 @@
                 </div>
 
                 {% if project.gallery_images.all %}
-                    <div class="pt-8 border-t border-slate-800">
-                        <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                            <i class="fas fa-images text-sky-500"></i> Gallery
-                        </h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {% for img in project.gallery_images.all %}
-                                <a href="{{ img.image.url }}" target="_blank"
-                                   class="group relative overflow-hidden rounded-xl border border-slate-700 shadow-md">
-                                    <div class="aspect-video">
-                                        <img src="{{ img.image.url }}" alt="Gallery image"
-                                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                                    </div>
-                                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                        <i class="fas fa-expand text-white text-2xl drop-shadow-md"></i>
-                                    </div>
-                                    {% if img.caption %}
-                                        <div class="absolute bottom-0 left-0 w-full bg-black/80 p-2 text-xs text-center text-slate-300 backdrop-blur-sm">
-                                            {{ img.caption }}
-                                        </div>
-                                    {% endif %}
-                                </a>
-                            {% endfor %}
-                        </div>
-                    </div>
+                    {% for img in project.gallery_images.all %}
+                        <a href="{{ img.image.url }}" target="_blank" ...>
+                            <div class="aspect-video">
+                                <img src="{{ img.image.url }}"
+                                     alt="Gallery image"
+                                     loading="lazy"
+                                     width="400" height="300"
+                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            </div>
+                        </a>
+                    {% endfor %}
                 {% endif %}
             </div>
 
